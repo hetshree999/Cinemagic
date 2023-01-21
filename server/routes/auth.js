@@ -51,18 +51,19 @@ router.post("/login", async(req, res) => {
 
     try {
        const userValid = await User.findOne({email:email});
-
+    //    res.status(201).json({ status: 201, userValid })
         if(userValid){
 
             const isMatch = await bcrypt.compare(password,userValid.password);
+            console.log(isMatch)
 
             if(!isMatch){
                 res.status(422).json({ error: "invalid details"})
             }else{
 
                 // token generate
-                const token = await userValid.generateAuthtoken();
-                console.log(token)
+                // const token = await userValid.generateAuthtoken();
+                // console.log(token)
 
                 // cookiegenerate
                 // res.cookie("usercookie",token,{
@@ -74,8 +75,10 @@ router.post("/login", async(req, res) => {
                 //     userValid,
                 //     token
                 // }
-                // res.status(201).json({status:201,result})
+                res.status(201).json({status:201,userValid})
             }
+        } else{
+            res.status(422).json({error:"email doesn't exist"})
         }
 
     } catch (error) {

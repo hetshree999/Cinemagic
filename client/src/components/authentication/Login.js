@@ -31,6 +31,7 @@ const Login = () => {
         // console.log("done!!");
         const data = await fetch("http://localhost:5000/login", {
             method: "POST",
+            Credentials:"include",
             headers:{
                 "Content-Type": "application/json"
             },
@@ -42,8 +43,8 @@ const Login = () => {
         const res = await data.json();
         console.log(res)
         if(res.status === 201){
-            localStorage.setItem("usersdatatoken",res.result.token);
-            // navigate("/dash")
+            // localStorage.setItem("usersdatatoken",res.result.token);
+            navigate("/dash")
             setUser({...user,email:"",password:""});
         }
     }
