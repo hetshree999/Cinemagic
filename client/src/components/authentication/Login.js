@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
@@ -19,21 +21,29 @@ const Login = () => {
     const {email, password}  = user;
 
     if(password === "" || email === ""){
-        alert("Please enter required field!");
+        toast.error("Please enter required field!", {
+            position: 'top-center'
+        });
     }
     else if(!email.includes("@")){
-        alert("Please enter valid email address!");
+        toast.error("Please enter valid email address!", {
+            position: 'top-center'
+        });
     }
     else if(password.length < 6){
-        alert("Password length must be greater or equal to 6!");
+        toast.warning("Password length must be greater or equal to 6!", {
+            position: 'top-center'
+        });
     }
     else{
         // console.log("done!!");
         const data = await fetch("http://localhost:5000/login", {
             method: "POST",
+            withCredentials: true,
             Credentials:"include",
             headers:{
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': '*'
             },
             body:JSON.stringify({
                 email, password
@@ -43,9 +53,19 @@ const Login = () => {
         const res = await data.json();
         console.log(res)
         if(res.status === 201){
-            // localStorage.setItem("usersdatatoken",res.result.token);
+            localStorage.setItem("usersdatatoken",res.result.token);
             navigate("/dash")
             setUser({...user,email:"",password:""});
+        } 
+        else if(res.error === "invalid details"){
+            toast.error("Invalid password!", {
+                position: 'top-center'
+            });
+        }
+        else if(res.error === "email doesn't exist"){
+            toast.error("Email does not exist!", {
+                position: 'top-center'
+            });
         }
     }
 }
@@ -82,6 +102,7 @@ const Login = () => {
                         <input type="submit" className="btn" value="Login" onClick={userLogin} />
                         <p>Don't have an account?<NavLink to='/signin'>SignUp</NavLink></p>
                     </form>
+                    <ToastContainer />
                 </div>
             </div>
     </div>

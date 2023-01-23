@@ -1,6 +1,9 @@
 import React, {useState} from "react"
 import { NavLink, useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./style.css"
+// import styles from "./style.css";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -29,19 +32,27 @@ const Register = () => {
         const {name, email, password, cpassword}  = user;
 
         if(name === "" || password === "" || email === "" || cpassword === ""){
-            alert("Please enter required field!");
+            toast.warning("Please enter required field!", {
+                position: "top-center"
+            });
         }
         else if(!email.includes("@")){
-            alert("Please enter valid email address!");
+            toast.warning("Please enter valid email address!", {
+                position: "top-center"
+            });
         }
         else if(password.length < 6){
-            alert("Password length must be greater or equal to 6!");
+            toast.warning("Password length must be greater or equal to 6!", {
+                position: "top-center"
+            });
         }
         else if(password !== cpassword){
-            alert("Password and confirm password should be same!");
+            toast.warning("Password and confirm password should be same!", {
+                position: "top-center"
+            });
         }
         else{
-            console.log("Registration done!!");
+            // console.log("Registration done!!");
             console.log(user)
             const url = "http://localhost:5000/register"
             const data = await fetch(url, {
@@ -55,13 +66,19 @@ const Register = () => {
             })
 
             const res = await data.json();
-            console.log(res)
+            console.log(res.error)
             if (res.status === 201) {
-                alert('Registration done!')
-                navigate('/')
+                toast.success('Registration done!', {
+                    position: "top-center"
+                })
+                // navigate('/')
                 setUser({ ...user, name: "", email: "", password: "", cpassword: "" });
             } 
-            
+            else if(res.error === "This Email is Already Exist"){
+                toast.warning("Email address already exist!", {
+                    position: "top-center"
+                })
+            }
         }
     }
 
@@ -108,9 +125,11 @@ const Register = () => {
                                 <input type="password" className="input" value={user.cpassword} onChange={setValue} placeholder="Confirm password" name="cpassword"/>
                             </div>
                         </div>
+                        
                         <input type="submit" className="btn" value="Register" onClick={addUserData} />
                         <p>Already have an account?<NavLink to='/'>Login</NavLink></p>
                     </form>
+                    <ToastContainer />
                 </div>
             </div>
         </>

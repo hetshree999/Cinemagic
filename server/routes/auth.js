@@ -62,20 +62,22 @@ router.post("/login", async(req, res) => {
             }else{
 
                 // token generate
-                // const token = await userValid.generateAuthtoken();
-                // console.log(token)
+                const token = await userValid.generateAuthtoken();
+                console.log(token)
 
                 // cookiegenerate
-                // res.cookie("usercookie",token,{
-                //     expires:new Date(Date.now()+9000000),
-                //     httpOnly:true
-                // });
+                res.cookie("usercookie",token,{
+                    expires:new Date(Date.now()+9000000),
+                    httpOnly:true,
+                });
+                // console.log(cookie)
 
-                // const result = {
-                //     userValid,
-                //     token
-                // }
-                res.status(201).json({status:201,userValid})
+                const result = {
+                    userValid,
+                    token
+                }
+                // res.setHeader('userCookie','isLoggedIn=true')
+                res.status(201).json({status:201,result})
             }
         } else{
             res.status(422).json({error:"email doesn't exist"})

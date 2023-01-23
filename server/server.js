@@ -3,7 +3,7 @@ const app = express()
 require('./database/connection')
 require('dotenv').config();
 const cookieParser = require("cookie-parser")
-
+app.use(cookieParser())
 const userRouter = require('./routes/auth')
 const cors = require("cors")
 const port = 5000
@@ -13,8 +13,8 @@ const port = 5000
 // })
 
 app.use(express.json())
-app.use(cookieParser())
-app.use(cors())
+app.set("trust proxy",1)
+app.use(cors({credentials:true}))
 app.use(userRouter)
 
 app.listen(port,()=>{

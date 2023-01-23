@@ -39,7 +39,9 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.pre("save", async function(next){
-    this.password = await bcrypt.hash(this.password, 12)
+    if(this.isModified("password")){
+        this.password = await bcrypt.hash(this.password, 12)
+    }  
     next()
 })
 
@@ -49,8 +51,8 @@ userSchema.methods.generateAuthtoken = async function () {
             expiresIn: "1d"
         });
 
-        this.tokens = this.tokens.concat({ token: token23 });
-        await this.save();
+        // this.tokens = this.tokens.concat({ token: token23 });
+        // await this.save();
         return token23;
     } catch (error) {
         res.status(422).json(error)
