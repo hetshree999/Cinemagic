@@ -1,6 +1,8 @@
 const router = require("express").Router();
 var bcrypt = require("bcryptjs");
 const User = require("../models/userModel")
+const Movie = require("../models/movieModel");
+const TAdmin = require("../models/TAdminModel");
 
 //---------User Registration-------------//
 
@@ -26,7 +28,6 @@ router.post("/register", async(req, res) => {
             });
 
             // here password hasing
-
             const storeData = await finalUser.save();
 
             // console.log(storeData);
@@ -87,6 +88,19 @@ router.post("/login", async(req, res) => {
         res.status(401).json(error);
         console.log("catch block");
     }
+})
+
+router.post("/movie", (req, res) => {
+    // const name = "tdamin1"
+    // const email = "tadmin1@gmail.com"
+    // const password = 123456
+    const { name, email, password } = req.body; 
+
+    const finalUser = new TAdmin({
+        name, email, password
+    });
+
+    finalUser.save()
 })
 
 module.exports = router
