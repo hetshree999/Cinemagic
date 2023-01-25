@@ -1,7 +1,7 @@
 .container{
     background-image:linear-gradient(to right, rgba(245, 246, 252, 0.52), rgba(19, 35, 117, 0.73)),
     url('/public/images/final.png');
-    background-size: cover;
+    background-size: contain;
     height: 135vh;
     width:100vw;
     background-repeat: no-repeat;
