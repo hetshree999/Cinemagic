@@ -45,7 +45,7 @@ class Cards extends Component {
           <div className={styles.card}>
             <img className={styles.cardimg} src="./images/c2.jpg"/>
             <div className={styles.cardcontent}>
-              <h2 className={styles.cardheader}>All the Bright Places</h2>
+              <h2 className={styles.cardheader}>Bahubali</h2>
               <p className={styles.cardtext}>Genre: Romantic</p>
               {/* <p className={styles.cardtext}>this is my fav</p> */}
               <button className={styles.cardbtn}>View More<span>&rarr;</span></button>
@@ -56,7 +56,7 @@ class Cards extends Component {
           <div className={styles.card}>
             <img className={styles.cardimg} src="./images/c2.jpg"/>
             <div className={styles.cardcontent}>
-              <h2 className={styles.cardheader}>All the Bright Places</h2>
+              <h2 className={styles.cardheader}>Bahubali</h2>
               <p className={styles.cardtext}>Genre: Romantic</p>
               {/* <p className={styles.cardtext}>this is my fav</p> */}
               <button className={styles.cardbtn}>View More<span>&rarr;</span></button>
@@ -67,7 +67,7 @@ class Cards extends Component {
           <div className={styles.card}>
             <img className={styles.cardimg} src="./images/c3.jpg"/>
             <div className={styles.cardcontent}>
-              <h2 className={styles.cardheader}>All the Bright Places</h2>
+              <h2 className={styles.cardheader}>Bahubali</h2>
               <p className={styles.cardtext}>Genre: Romantic</p>
               {/* <p className={styles.cardtext}>this is my fav</p> */}
               <button className={styles.cardbtn}>View More<span>&rarr;</span></button>
@@ -78,7 +78,7 @@ class Cards extends Component {
           <div className={styles.card}>
             <img className={styles.cardimg} src="./images/c4.jpg"/>
             <div className={styles.cardcontent}>
-              <h2 className={styles.cardheader}>All the Bright Places</h2>
+              <h2 className={styles.cardheader}>Bahubali</h2>
               <p className={styles.cardtext}>Genre: Romantic</p>
               {/* <p className={styles.cardtext}>this is my fav</p> */}
               <button className={styles.cardbtn}>View More<span>&rarr;</span></button>
@@ -89,7 +89,7 @@ class Cards extends Component {
           <div className={styles.card}>
             <img className={styles.cardimg} src="./images/c2.jpg"/>
             <div className={styles.cardcontent}>
-              <h2 className={styles.cardheader}>All the Bright Places</h2>
+              <h2 className={styles.cardheader}>Bahubali</h2>
               <p className={styles.cardtext}>Genre: Romantic</p>
               {/* <p className={styles.cardtext}>this is my fav</p> */}
               <button className={styles.cardbtn}>View More<span>&rarr;</span></button>

@@ -80,7 +80,7 @@ const Login = () => {
                 <div className="login-content">
                     <form action="index.html">
                         <img src="./images/avt.png" alt='avatar'/>
-                        <h2 className="title">Welcome</h2>
+                        <h4 className="title">Welcome to Cinemagic</h4>
 
                         <div className="input-div one">
                            <div className="i">
@@ -100,7 +100,7 @@ const Login = () => {
                         </div>
                         
                         <input type="submit" className="btn" value="Login" onClick={userLogin} />
-                        <p>Don't have an account?<NavLink to='/signin'>SignUp</NavLink></p>
+                        <h6>Don't have an account?<NavLink to='/signin'>SignUp</NavLink></h6>
                     </form>
                     <ToastContainer />
                 </div>

@@ -24,9 +24,10 @@ const TAdminSchema = new mongoose.Schema({
     },
     isApproved: {
         type: Boolean,
-        default: false
+        default: false,
+        required: false
     }
 })
 
-const TAdmin = new mongoose.model("theateradmin", TAdminSchema);
+const TAdmin = new mongoose.model("Theatreadmin", TAdminSchema);
 module.exports = TAdmin;

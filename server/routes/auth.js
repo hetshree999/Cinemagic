@@ -3,6 +3,7 @@ var bcrypt = require("bcryptjs");
 const User = require("../models/userModel")
 const Movie = require("../models/movieModel");
 const TAdmin = require("../models/TAdminModel");
+const authenticate = require("../middleware/authenticate")
 
 //---------User Registration-------------//
 
@@ -64,7 +65,7 @@ router.post("/login", async(req, res) => {
 
                 // token generate
                 const token = await userValid.generateAuthtoken();
-                console.log(token)
+                // console.log(token)
 
                 // cookiegenerate
                 res.cookie("usercookie",token,{
@@ -90,17 +91,28 @@ router.post("/login", async(req, res) => {
     }
 })
 
-router.post("/movie", (req, res) => {
-    // const name = "tdamin1"
-    // const email = "tadmin1@gmail.com"
-    // const password = 123456
-    const { name, email, password } = req.body; 
+router.get("/validuser",authenticate,async(req,res)=>{
+    try {
+        const ValidUserOne = await User.findOne({_id:req.userId});
+        res.status(201).json({status:201,ValidUserOne});
+    } catch (error) {
+        res.status(401).json({status:401,error});
+    }
+    // console.log("done")
+});
 
-    const finalUser = new TAdmin({
-        name, email, password
-    });
 
-    finalUser.save()
-})
+// router.post("/movie", (req, res) => {
+//     // const name = "tdamin1"
+//     // const email = "tadmin1@gmail.com"
+//     // const password = 123456
+//     const { name, email, password } = req.body; 
+
+//     const finalUser = new TAdmin({
+//         name, email, password
+//     });
+
+//     finalUser.save()
+// })
 
 module.exports = router

@@ -1,0 +1,40 @@
+.Container {
+    display: flex;
+}
+
+.Container form {
+    height: 500px;
+    width: 800px;
+    display: inline-block;
+}
+
+.form{
+    width: 700;
+}
+
+input{
+    border: 1px solid black;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #002541, #002541, #002541);
+    background-size: 200%;
+    font-size: 1.2rem;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    margin: 1rem 0;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btn:hover {
+    background-position: right;
+    color: #fba12e;
+}

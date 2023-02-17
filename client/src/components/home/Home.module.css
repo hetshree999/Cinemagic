@@ -1,38 +1,44 @@
 .container{
-    background-image:linear-gradient(to right, rgba(245, 246, 252, 0.52), rgba(19, 35, 117, 0.73)),
-    url('/public/images/final.png');
-    background-size: contain;
-    height: 135vh;
-    width:100vw;
+    margin-top: 2rem;
+    background-image:
+    url('/public/images/cinema.jpeg');
+    background-size: cover;
+    height: 95vh;
+    /* width:150vw; */
+    width: 100%;
     background-repeat: no-repeat;
 }
 .container h2,p{
     font-size: 40px;
-    margin-top:-250px;
+    margin-top:-450px;
     margin-left: 50px;
     color: black;
     display: grid;
-    grid-template-columns: 1fr 1fr;
     justify-content: space-between;
 }
 .container h2{
-    padding-top: 600px;
-    padding-left: -700px;
+    margin-left: 750px;
+    padding-top: 700px;
+    padding-right: -700px;
+    /* margin-top:-450px; */
     font-size: 55px;
     color: black;
+    overflow: hidden;
 }
 p{
     font-weight: 500;
-    font-size: 15px;
+    margin-left: 750px;
+    font-size: 19px;
     margin-top: 5px;
+    margin-right: 10px;
+    grid-template-columns: 1.5fr 0.5fr;
+    
 }
-button {
+.container button {
     width:200px;
-    text-align: center;
-    margin: 20px ;
-    padding-top: 200px;
-    left: 100%;
-    margin-right: 700px;
+    margin-top:20px;
+    margin-left: 900px;
+    padding-top: 20px;
     border: 0.2rem solid navy;
     border-radius: 25px;
     color:black;
@@ -42,7 +48,7 @@ button {
     padding: 0.5rem 1rem;
     background: transparent;
   }
-button:hover {
+.container button:hover {
     background:rgb(157, 157, 244);
     color: black;
 }

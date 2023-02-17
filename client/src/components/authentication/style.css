@@ -2,6 +2,7 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	/* overflow: hidden; */
 }
 
 body{
@@ -43,6 +44,7 @@ body{
 	width: 500px;
 }
 
+
 form{
 	width: 360px;
 }
@@ -56,6 +58,7 @@ form{
 	color: #333;
 	text-transform: uppercase;
 	font-size: 2.9rem;
+	overflow:hidden
 }
 
 .login-content .input-div{

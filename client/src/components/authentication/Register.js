@@ -2,7 +2,9 @@ import React, {useState} from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './main'
 import "./style.css"
+
 // import styles from "./style.css";
 
 const Register = () => {
@@ -15,15 +17,7 @@ const Register = () => {
     })
 // console.log(user)
     const setValue = ({currentTarget: input}) => {
-        // console.log(e.target.value)
-        // const {name,value} = e.target;
         setUser({...user, [input.name]:input.value})
-        // setUser(() => {
-        //     return{
-        //         ...user,
-        //         [name]:value
-        //     }
-        // })
     }
 
     const addUserData = async(e) => {
@@ -84,6 +78,7 @@ const Register = () => {
 
     return(
         <>
+        <div className="forms">
         <img className="wave" src="./images/bg.png" alt="wave"/>
             <div className="container">
                 <div className="img">
@@ -127,10 +122,11 @@ const Register = () => {
                         </div>
                         
                         <input type="submit" className="btn" value="Register" onClick={addUserData} />
-                        <p>Already have an account?<NavLink to='/'>Login</NavLink></p>
+                        <h6>Already have an account?<NavLink to='/'>Login</NavLink></h6>
                     </form>
                     <ToastContainer />
                 </div>
+            </div>
             </div>
         </>
     )
