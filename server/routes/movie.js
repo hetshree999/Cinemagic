@@ -34,4 +34,18 @@ router.post("/addMovie", async(req,res) => {
 
 })
 
+router.post("/getDetails", async(req,res) => {
+    // console.log(req.body)
+    const _id= req.body.id
+    console.log(_id)
+    // const detail = Movie.findOne({_id:_id})
+    try {
+        const detail = await Movie.findOne({_id:_id});
+        res.status(201).json({status:201,detail});
+    } catch (error) {
+        res.status(401).json({status:401,error});
+    }
+    // console.log(detail)
+    // res.status(201).json({status:201, detail})
+})
 module.exports = router

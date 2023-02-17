@@ -22,7 +22,7 @@ function App() {
         <Route path='/req' element={<Request />} />
         <Route path='/addmovie' element={<AddMovie />} />
         <Route path='/movies' element={<Movie />} />
-        <Route path='/description' element={<Description />} />
+        <Route path='/description/:id' element={<Description />} />
         {/* <Route path='description' element={<Description />} /> */}
       </Routes>
     </>

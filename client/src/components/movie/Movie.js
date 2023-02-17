@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from "./movie.module.css"
 import Description from './Description';
+import Navbar from '../navbar/Navbar';
 
 const Movie = () => {
-    const name = "isha"
     const[movie,setMovie] = useState([''])
     const displayFun = async () => {
         const res = await fetch("http://localhost:5000/movies", {
@@ -26,7 +26,7 @@ const Movie = () => {
     useEffect(() => {
         setTimeout(() => {
             displayFun();
-        }, 1000)
+        })
     
     }, [])
 
@@ -41,9 +41,10 @@ const Movie = () => {
                         <div className={styles.cardcontent}>
                         <h2 className={styles.cardheader}>{item.movieName}</h2>
                         <p className={styles.cardtext}>{item.genre}</p>
-                        <Description name={name} />
+                        <p className={styles.cardtext}>{item.duration}</p>
+                        {/* <Description name="pathan" /> */}
               {/* <p className={styles.cardtext}>This is my fav</p> */}
-                        <NavLink to="/description" className={styles.cardbtn}>View More<span>&rarr;</span></NavLink>
+                        <NavLink to={`/description/${item._id}`} className={styles.cardbtn}>View More<span>&rarr;</span></NavLink> 
                     </div>
                 </div>
             </div>
@@ -54,9 +55,12 @@ const Movie = () => {
     })
 
   return (
-    <div>
+    <>
+    <Navbar />
+    <div className="movieCard" style={{ display: "flex", flexWrap:"wrap", marginLeft:"8rem", overflow:"hidden", marginTop:"2rem"}}>
         {display}
     </div>
+    </>
   )
 }
 

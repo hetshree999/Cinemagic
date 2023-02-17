@@ -1,10 +1,54 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
 
-const Description = (props) => {
-  console.log(props.name)
+const Description = () => {
+
+  const [movie,setMovie] = useState({
+    movieName:"",
+    date:"",
+    duration:"",
+    description:"",
+    genre:"",
+    certificate:"",
+    dimensions:"",
+  })
+
+  const path = window.location.pathname
+  const array = path.split("/")
+  const id = array[2]
+  console.log(id)
+
+  const getData = async() => {
+    const data = await fetch("http://localhost:5000/getDetails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify({
+        id
+      })
+    })
+    const res = await data.json();
+    console.log(res)
+    if(res.status === 201){
+      setMovie(res.detail)
+    }
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      getData()
+    })
+  }, [])
+
   return (
     <div>
-      <p>{props.name}</p>
+      <p>{movie.movieName}</p>
+      <p>{movie.description}</p>
+      <p>{movie.date}</p>
+      <p>{movie.certificate}</p>
+      <p>{movie.dimensions}</p>
+      <p>{movie.duration}</p>
     </div>
   )
 }
