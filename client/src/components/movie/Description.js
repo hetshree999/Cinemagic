@@ -38,7 +38,7 @@ const Description = () => {
   useEffect(() => {
     setTimeout(() => {
       getData()
-    })
+    }, 1000)
   }, [])
 
   return (
@@ -49,6 +49,7 @@ const Description = () => {
       <p>{movie.certificate}</p>
       <p>{movie.dimensions}</p>
       <p>{movie.duration}</p>
+      
     </div>
   )
 }

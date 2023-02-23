@@ -42,6 +42,11 @@ const AddMovie = () => {
       })
       const res = await data.json();
       console.log(res)
+      if(res.status === 201){
+        toast.success('Movie added successfuly!', {
+          position: "top-center"
+        })
+      }
     }
   }
     // const [counter, setCounter] = useState(0);

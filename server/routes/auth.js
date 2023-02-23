@@ -101,18 +101,22 @@ router.get("/validuser",authenticate,async(req,res)=>{
     // console.log("done")
 });
 
+router.get("/logout",authenticate,async(req,res)=>{
+    try {
+        req.rootUser.tokens =  req.rootUser.tokens.filter((curelem)=>{
+            return curelem.token !== req.token
+        });
 
-// router.post("/movie", (req, res) => {
-//     // const name = "tdamin1"
-//     // const email = "tadmin1@gmail.com"
-//     // const password = 123456
-//     const { name, email, password } = req.body; 
+        res.clearCookie("usercookie",{path:"/"});
 
-//     const finalUser = new TAdmin({
-//         name, email, password
-//     });
+        req.rootUser.save();
 
-//     finalUser.save()
-// })
+        res.status(201).json({status:201})
+
+    } catch (error) {
+        res.status(401).json({status:401,error})
+    }
+})
+
 
 module.exports = router

@@ -26,9 +26,10 @@ const Home = () => {
     });
 
     const data = await res.json();
-    // console.log(data)
+    console.log(data)
     if (data.status === 401 || !data) {
       console.log("error page")
+      history("*");
     } else {
       console.log("user verify");
       setLoginData(data)
@@ -41,7 +42,7 @@ useEffect(() => {
     setTimeout(() => {
         DashboardValid();
         setData(true)
-    }, 2000)
+    })
 
 }, [])
 

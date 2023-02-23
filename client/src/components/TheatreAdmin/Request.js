@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import { ToastContainer, toast } from 'react-toastify';
+import { NavLink } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import "../authentication/style.css"
 
@@ -84,7 +85,7 @@ const Request = () => {
                         <i className="fas fa-user"></i>
                     </div>
                     <div className="div">
-                        <input type="text" className="input" value={TAdmin.tname} onChange={setValue} placeholder="Theatername" name="tname"/>
+                        <input type="text" className="input" value={TAdmin.tname} onChange={setValue} placeholder="Theater name" name="tname"/>
                     </div>
                 </div>
                 <div className="input-div one">
@@ -113,8 +114,10 @@ const Request = () => {
                 </div>
                 <input type="submit" className="btn" value="Request" onClick={addTAdminData} />
                 {/* <p>Already have an account?<NavLink to='/'>Login</NavLink></p> */}
+                <NavLink to='/tlogin'>SignUp</NavLink>
             </form>
-        <ToastContainer />
+            
+            <ToastContainer />
     </div>
     </div>
         </>

@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { LoginContext } from "../ContextProvider/Context";
 
 
-const Navbar = () => {
+const Tnavbar = (props) => {
     
     const { logindata, setLoginData } = useContext(LoginContext);
 
@@ -18,9 +18,9 @@ const Navbar = () => {
     const history = useNavigate();
 
     const handleLogout = async () => {
-        let token = localStorage.getItem("usersdatatoken");
+        let token = localStorage.getItem("tadmindatatoken");
 
-        const res = await fetch("http://localhost:5000/logout", {
+        const res = await fetch("http://localhost:5000/tlogout", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -34,26 +34,22 @@ const Navbar = () => {
 
         if (data.status == 201) {
             console.log("use logout");
-            localStorage.removeItem("usersdatatoken");
+            localStorage.removeItem("tadmindatatoken");
             setLoginData(false)
-            history("/");
+            history("/tlogin");
         } else {
             console.log("error");
         }
     }
-
-    
         return(
             <div className="navbar-div">
             <header class="header">
-                <a href="#" className="logo">Cinemagic </a>
+                <a href="#" className="logo">Welcome {props.user} </a>
                 <nav className="navbar">
                     <div id="nav-close"></div>
                     <NavLink to="/dash">Home</NavLink>
-                    <NavLink to="/movies">Movies</NavLink>
-                    <a href="#">Reviews</a>
-                    <a href="#">Contact Us</a>
-                    <a href="#">About Us</a>
+                    {/* <NavLink to="/addShow">Add Show</NavLink> */}
+                    <NavLink to="/addShow" state={{name:"isha"}}>Add Show</NavLink>
                     <NavLink to="/" onClick={handleLogout}>Logout</NavLink>
                 </nav>
             </header>
@@ -63,4 +59,4 @@ const Navbar = () => {
 
 
 
-export default Navbar;
+export default Tnavbar;
