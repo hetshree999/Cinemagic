@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Description = () => {
 
@@ -43,13 +44,14 @@ const Description = () => {
 
   return (
     <div>
+      <img  src={`http://localhost:5000/image/${movie?.image}`} alt="No"/>
       <p>{movie.movieName}</p>
       <p>{movie.description}</p>
       <p>{movie.date}</p>
       <p>{movie.certificate}</p>
       <p>{movie.dimensions}</p>
       <p>{movie.duration}</p>
-      
+      <NavLink to={`/shows/${movie.movieName}`}>Book show</NavLink>
     </div>
   )
 }

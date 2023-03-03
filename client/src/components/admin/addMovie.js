@@ -1,6 +1,7 @@
 import React from "react"
 import { useState } from "react";
 import "./astyle.module.css"
+import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const AddMovie = () => {
@@ -12,49 +13,62 @@ const AddMovie = () => {
     description:"",
     genre:"",
     certificate:"",
-    dimensions:"",
+    dimensions:""
   })
+
+  const [image, setImage] = useState("")
 
   const setValue = ({currentTarget: input}) => {
       setMovie({...movie, [input.name]:input.value})
+  }
+
+  const imageUpload = (e) =>{
+    setImage(e.target.files[0])
   }
 
   const addMovieData = async(e) => {
     e.preventDefault()
     const {movieName,releaseDate,duration,description,genre,certificate,dimensions} = movie;
 
-    if(movieName === "" || releaseDate === "" || duration === "" || description === "" || genre === "" || certificate === "" || dimensions === ""){
+    if(movieName === "" || releaseDate === "" || duration === "" || description === "" || genre === "" || certificate === "" || dimensions === "" || image === ""){
       toast.warning("Please enter required field!", {
         position: "top-center"
       });
     }
     else{
       console.log(movie)
+      console.log(image)
       const url = "http://localhost:5000/addMovie"
+      const formdata = new FormData();
+      formdata.append('movieName', movie.movieName)
+      formdata.append('dimensions', movie.dimensions)
+      formdata.append('releaseDate', movie.releaseDate)
+      formdata.append('description', movie.description)
+      formdata.append('certificate', movie.certificate)
+      formdata.append('duration', movie.duration)
+      formdata.append('genre', movie.genre)
+      formdata.append('poster', image)
+      
       const data = await fetch(url, {
         method: "POST",
-        headers: {
-          "content-Type": "Application/json"
-        },
-        body:JSON.stringify({
-          movieName,releaseDate,duration,description,genre,certificate,dimensions
-        })
+        body: formdata
       })
-      const res = await data.json();
-      console.log(res)
+      
+      const res = await data.json()
+      console.log(res.status)
       if(res.status === 201){
         toast.success('Movie added successfuly!', {
+          position: "top-center"
+        })
+      } 
+      else if(res.status === 422 ){
+        toast.warning('This movie already exist!', {
           position: "top-center"
         })
       }
     }
   }
-    // const [counter, setCounter] = useState(0);
 
-    // const handleClick = () => {
-    //     setCounter(counter + 1);
-    //     console.log(counter);
-    // };
     return(
         <>
             {/* <button onClick={handleClick}>Add</button>
@@ -103,7 +117,7 @@ const AddMovie = () => {
 
             </form>
             </div> */}
-            <form className="row g-3">
+            <form className="row g-3" method="post" >
   <div className="col-md-6">
     <label htmlFor="movieName" className="form-label">Movie name</label>
     <input type="text" name="movieName" className="form-control" onChange={setValue} value={movie.movieName}/>
@@ -143,8 +157,8 @@ const AddMovie = () => {
       <option>3D</option>
     </select>
   </div>
-  <div className="col-md-12">
-  Movie Image : <input type="file" name="castImage" id="castImage"/>
+  <div className="col-md-12" >
+  Movie Image : <input type="file" name="uploaded_file" id="castImage" onChange={imageUpload} />
   </div>
   {/* <div className="col-md-2">
     <label for="inputZip" className="form-label">Zip</label>

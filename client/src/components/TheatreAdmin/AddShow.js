@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 const AddShow = () => {
     const { logindata, setLoginData } = useContext(LoginContext);
     console.log(logindata)
-    const [user, setUser] = useState('')
+    const [theatreName, setTheatreName] = useState('')
     const [data, setData] = useState(false);
     const history = useNavigate();
 
@@ -30,7 +30,7 @@ const AddShow = () => {
         } else {
           console.log("user verify");
           setLoginData(data)
-          setUser(data.ValidUserOne.tname)
+          setTheatreName(data.ValidUserOne.tname)
         }    
     }
     const[movie,setMovie] = useState([''])
@@ -65,7 +65,7 @@ const AddShow = () => {
 
         const {movie, timing, price} = show;
         console.log(show)
-        console.log(user)
+        console.log(theatreName)
         const url = "http://localhost:5000/addShow"
         const data = await fetch(url, {
             method: "POST",
@@ -73,7 +73,7 @@ const AddShow = () => {
                 "Content-Type": "Application/json",
             },
             body:JSON.stringify({
-                movie, timing, price, user
+                movie, timing, price, theatreName
             })
         })
         const res = await data.json();

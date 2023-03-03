@@ -31,7 +31,7 @@ const MovieSchema = new mongoose.Schema({
     //     }
     // ],
     genre: [String],
-    image: { data: Buffer, contentType: String }
+    image: String
 });
 
 const Movie = new mongoose.model("movies", MovieSchema);

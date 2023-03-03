@@ -37,11 +37,11 @@ const Movie = () => {
             <div className={styles.griditem}>
                 <div className={styles.griditem}>
                     <div className={styles.card}>
-                        <img className={styles.cardimg} src="./images/c2.jpg" alt="No"/>
+                        <img className={styles.cardimg} src={`http://localhost:5000/image/${item?.image}`} alt="Not Supported"/>
                         <div className={styles.cardcontent}>
                         <h2 className={styles.cardheader}>{item.movieName}</h2>
                         <p className={styles.cardtext}>{item.genre}</p>
-                        <p className={styles.cardtext}>{item.duration}</p>
+                        {/* <p className={styles.cardtext}>{item.duration}</p> */}
                         {/* <Description name="pathan" /> */}
               {/* <p className={styles.cardtext}>This is my fav</p> */}
                         <NavLink to={`/description/${item._id}`} className={styles.cardbtn}>View More<span>&rarr;</span></NavLink> 

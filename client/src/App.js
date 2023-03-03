@@ -12,6 +12,8 @@ import Tlogin from './components/TheatreAdmin/Tlogin';
 import AdminHome from './components/admin/adminHome';
 import Thome from './components/TheatreAdmin/Thome';
 import Error from './components/error/Error';
+import BookNow from './components/booknow/BookNow';
+import Shows from './components/shows/Shows';
 
 function App() {
   // const user = localStorage.getItem("userdatatoken");
@@ -31,6 +33,8 @@ function App() {
         <Route path='/tlogin' element={<Tlogin />} />
         <Route path='/admin' element={<AdminHome />} />
         <Route path='/thome' element={<Thome />} />
+        <Route path='/book' element={<BookNow />} />
+        <Route path='/shows/:name' element={<Shows />} />
         <Route path="*" element={<Error />} />
         {/* <Route path='description' element={<Description />} /> */}
       </Routes>

@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+  }
+  .maincontainer {
+    background-color: #fff;
+    color: #fff;
+    height: 800px;
+    font-family: sans-serif;
+  }
+  .maincontainer h2{
+    color: rgb(8, 14, 96);
+    font-size: 25px;
+    margin-left: 50px;
+    padding-top: 25px;
+    display: inline;
+  }
+  .maincontainer select {
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-top: 2px;
+    margin-left: 45px;
+    display: inline;
+  }
+  .maincontainer h3{
+    color: rgb(8, 14, 96);
+    margin-left: 250px;
+    margin-top: 20px;
+  }
+  .maincontainer label{
+    font-size: 25px;
+    color: rgb(16, 8, 135);
+    margin-left: 10px;
+  }
+  .screen{
+    background-color: rgb(255, 255, 255);
+    width: 530px;
+    height: 200px;
+    margin-top: 20px;
+    margin-left: 500px;
+    margin-bottom: 50px;
+    transform: rotateX(-50deg);
+    box-shadow: 0 3px 10px rgba(13, 4, 111, 0.7);
+  }
+  .seat{
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(50, 67, 124);
+    margin: 5px;
+    font-size: 13px;
+  }
+  .selected {
+    background-color: green;
+  }
+  .sold {
+    background-color: #0b0000;
+  }
+  .seat:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+  .seat:nth-of-type(2) {
+    margin-right: 25px;
+  }
+  .seat:nth-last-of-type(2) {
+    margin-left: 25px;
+  }
+  .row{
+    display: flex;
+    margin-left: 550px;
+  }
+  .showcase .seat:not(.sold):hover {
+    cursor: default;
+    transform: scale(1);
+  }
+  .showcase {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #000000;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+  }
+  .showcase li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+  }
+  .showcase li small {
+    margin-left: 2px;
+  }
+  .booknow_Btn button{
+    padding: 15px;
+    margin-left: 700px;
+    margin-top: 20px;
+    background-color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(3, 25, 150);
+    border: 0.2rem solid navy;
+  }

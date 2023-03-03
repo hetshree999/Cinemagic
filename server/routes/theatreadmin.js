@@ -2,6 +2,7 @@ const router = require("express").Router();
 const mongoose = require("mongoose")
 const Tadmin = mongoose.model('Theatreadmin')
 const Movie = require("../models/movieModel");
+const Show = require("../models/showModel")
 const authenticate = require("../middleware/tauthenticate")
 // const Tadmin = require("../models/TadminModel")
 
@@ -115,8 +116,20 @@ router.get("/tlogout",authenticate,async(req,res)=>{
     }
 })
 
-router.post("/addShow", (req, res) => {
+router.post("/addShow", async(req, res) => {
     console.log(req.body)
+    const { movie, timing, price, theatreName } = req.body;
+    const newShow = new Show({
+        movie, timing, price, theatreName
+    })
+
+    try{
+        const storeData = await newShow.save();
+        res.status(201).json({ status:201, storeData })
+    } catch(error){
+        res.status(422).json(error)
+        console.log("catch block error")
+    }
 })
 
 module.exports = router
