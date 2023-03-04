@@ -2,7 +2,9 @@ import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../ContextProvider/Context'
-import { useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './AddShow.module.css'
 
 const AddShow = () => {
     const { logindata, setLoginData } = useContext(LoginContext);
@@ -38,6 +40,7 @@ const AddShow = () => {
         movie: "",
         timing: "",
         price: "",
+        date: ""
     })
 
     const setValue = ({currentTarget: input}) => {
@@ -63,9 +66,9 @@ const AddShow = () => {
     const submit = async(e) => {
         e.preventDefault();
 
-        const {movie, timing, price} = show;
+        const {movie, timing, price, date} = show;
         console.log(show)
-        console.log(theatreName)
+        // console.log(theatreName)
         const url = "http://localhost:5000/addShow"
         const data = await fetch(url, {
             method: "POST",
@@ -73,12 +76,25 @@ const AddShow = () => {
                 "Content-Type": "Application/json",
             },
             body:JSON.stringify({
-                movie, timing, price, theatreName
+                movie, timing, price, theatreName, date
             })
         })
+
         const res = await data.json();
         console.log(res)
+
+        if(res.status === 201){
+            toast.success('Show added successfuly!', {
+                position: "top-center"
+              })
+        }
+        else if(res.status === 422 ){
+            toast.warning('This movie already exist!', {
+              position: "top-center"
+            })
+        }
     }
+    
     // displayFun()
     // useEffect(() => {
     //     setTimeout(() => {
@@ -103,17 +119,21 @@ const AddShow = () => {
   return (
     <div>
         <form className="row g-3">
+            
             <select name="movie" onClick={displayFun} value={show.movie} onChange={setValue}>
                 <option value="">Select movie</option>
 		        {display}
 	        </select>
-            
+            <label htmlFor="date" className="form-label">Date</label>
+            <input type="date" name='date' value={show.date} onChange={setValue}/>
             <label htmlFor="timing" className="form-label">Timing</label>
             <input type="time" name='timing' value={show.timing} onChange={setValue}/>
             <label htmlFor="price" className="form-label">Price</label>
             <input type="text" name='price' value={show.price} onChange={setValue}/>
+            
             <button type='submit' onClick={submit}>Submit</button>
         </form>
+        <ToastContainer />
     </div>
   )
 }

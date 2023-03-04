@@ -118,14 +118,29 @@ router.get("/tlogout",authenticate,async(req,res)=>{
 
 router.post("/addShow", async(req, res) => {
     console.log(req.body)
-    const { movie, timing, price, theatreName } = req.body;
-    const newShow = new Show({
-        movie, timing, price, theatreName
-    })
+    const { movie, timing, price, theatreName, date } = req.body;
+    const show = {timing, price}
 
-    try{
-        const storeData = await newShow.save();
-        res.status(201).json({ status:201, storeData })
+    try {
+        const findShow = await Show.findOne({movie:movie, theatreName:theatreName, date:date})
+        if(findShow){
+            await Show.findOneAndUpdate(
+                {movie:movie, theatreName:theatreName, date:date},
+                {$push: { show: show }}
+            )
+            console.log("update")
+            res.status(201).json({ status:201 })
+            console.log("done")
+        }
+        else{
+            console.log("enter else")
+            const newShow = new Show({
+                movie, show, theatreName, date
+            })
+            const storeData = await newShow.save();
+            res.status(201).json({ status:201, storeData })
+        }
+        
     } catch(error){
         res.status(422).json(error)
         console.log("catch block error")

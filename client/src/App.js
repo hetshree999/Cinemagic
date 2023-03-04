@@ -14,6 +14,7 @@ import Thome from './components/TheatreAdmin/Thome';
 import Error from './components/error/Error';
 import BookNow from './components/booknow/BookNow';
 import Shows from './components/shows/Shows';
+import AdminDash from './components/admin/AdminDash';
 
 function App() {
   // const user = localStorage.getItem("userdatatoken");
@@ -35,6 +36,7 @@ function App() {
         <Route path='/thome' element={<Thome />} />
         <Route path='/book' element={<BookNow />} />
         <Route path='/shows/:name' element={<Shows />} />
+        <Route path='/adminDash' element={<AdminDash />} />
         <Route path="*" element={<Error />} />
         {/* <Route path='description' element={<Description />} /> */}
       </Routes>

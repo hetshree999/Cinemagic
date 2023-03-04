@@ -1,7 +1,6 @@
 import React from "react"
 import { useState } from "react";
 import "./astyle.module.css"
-import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const AddMovie = () => {

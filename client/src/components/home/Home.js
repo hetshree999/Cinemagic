@@ -5,6 +5,8 @@ import styles from "./Home.module.css"
 import { useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { LoginContext } from '../ContextProvider/Context'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
 
@@ -15,6 +17,9 @@ const Home = () => {
 
   const history = useNavigate();
   const DashboardValid = async () => {
+    toast.success('Logged in!', {
+      position: "top-center"
+  })
     let token = localStorage.getItem("usersdatatoken");
 
     const res = await fetch("http://localhost:5000/validuser", {
@@ -56,6 +61,7 @@ useEffect(() => {
         <button className={styles.btn}>Book Now</button>
       </div>
       <Cards />
+      <ToastContainer />
     </div>
   )
 }

@@ -54,7 +54,12 @@ const Login = () => {
         console.log(res)
         if(res.status === 201){
             localStorage.setItem("usersdatatoken",res.result.token);
-            navigate("/dash")
+            if(res.result.userValid.role === "admin"){
+                navigate("/adminDash")
+            }else{
+                navigate("/dash")
+            }
+            
             setUser({...user,email:"",password:""});
         } 
         else if(res.error === "invalid details"){

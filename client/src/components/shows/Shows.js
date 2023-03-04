@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import Navbar from '../navbar/Navbar'
 
 const Shows = () => {
     const [show, setShow] = useState([{
         movie:"",
-        timing:"",
-        price:"",
-        theatreName:""
+        show:"",
+        theatreName:"",
+        date:""
 }])
 
     const path = window.location.pathname
@@ -40,14 +41,16 @@ const Shows = () => {
         return(
             <div>
             <p>{item.theatreName}</p>
-            {/* <p>{item.movie}</p> */}
-            <p>{item.timing}</p>
-            <p>{item.price}</p>
+            {
+              item.show.map((x) => <div><p>{x.timing} - {x.price}</p></div>)
+            }
+            
             </div>
         )
       })
   return (
     <div>
+      {/* <Navbar /> */}
       {display}
     </div>
   )
