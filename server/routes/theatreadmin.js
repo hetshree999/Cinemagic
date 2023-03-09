@@ -117,8 +117,16 @@ router.get("/tlogout",authenticate,async(req,res)=>{
 })
 
 router.post("/addShow", async(req, res) => {
-    console.log(req.body)
-    const { movie, timing, price, theatreName, date } = req.body;
+    // console.log(req.body)
+    let { movie, timing, price, theatreName, date } = req.body;
+    
+    // const array = timing.split(":")
+    
+    // if(array[0] >= 12){
+    //     timing = timing + 'PM'
+    // } else {
+    //     timing = timing + 'AM'
+    // }
     const show = {timing, price}
 
     try {

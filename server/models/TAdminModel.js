@@ -25,8 +25,8 @@ const TAdminSchema = new mongoose.Schema({
         minlength:6
     },
     isApproved: {
-        type: Boolean,
-        default: false,
+        type: String,
+        default: "false",
         required: false
     },
     tokens:[

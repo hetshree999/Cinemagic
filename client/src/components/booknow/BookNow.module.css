@@ -4,7 +4,6 @@
   .maincontainer {
     background-color: #fff;
     color: #fff;
-    height: 800px;
     font-family: sans-serif;
   }
   .maincontainer h2{
@@ -39,7 +38,6 @@
     height: 200px;
     margin-top: 20px;
     margin-left: 500px;
-    margin-bottom: 50px;
     transform: rotateX(-50deg);
     box-shadow: 0 3px 10px rgba(13, 4, 111, 0.7);
   }
@@ -77,15 +75,15 @@
     transform: scale(1);
   }
   .showcase {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 5px 10px;
     border-radius: 5px;
     color: #000000;
     list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
   }
   .showcase li {
+    float: left;
     display: flex;
     align-items: center;
     justify-content: center;

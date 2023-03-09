@@ -34,7 +34,7 @@ function App() {
         <Route path='/tlogin' element={<Tlogin />} />
         <Route path='/admin' element={<AdminHome />} />
         <Route path='/thome' element={<Thome />} />
-        <Route path='/book' element={<BookNow />} />
+        <Route path='/book/:name/:theatre/:time/:price' element={<BookNow />} />
         <Route path='/shows/:name' element={<Shows />} />
         <Route path='/adminDash' element={<AdminDash />} />
         <Route path="*" element={<Error />} />

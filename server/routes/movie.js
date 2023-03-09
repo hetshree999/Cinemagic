@@ -17,6 +17,15 @@ router.get("/movies", async(req,res) => {
     }
 })
 
+router.get("/dash", async(req,res) => {
+    try {
+        const movies = await Movie.find({}).limit(6);
+        res.status(201).json({status:201,movies});
+    } catch (error) {
+        res.status(401).json({status:401,error});
+    }
+})
+
 const Storage = multer.diskStorage({
     destination: './uploads',
     filename: (req, file, cb)=>{
@@ -84,7 +93,7 @@ router.post("/addMovie", upload, async(req,res) => {
 router.post("/getDetails", async(req,res) => {
     // console.log(req.body)
     const _id= req.body.id
-    console.log(_id)
+    // console.log(_id)
     // const detail = Movie.findOne({_id:_id})
     try {
         const detail = await Movie.findOne({_id:_id});
@@ -97,11 +106,12 @@ router.post("/getDetails", async(req,res) => {
 })
 
 router.post("/getShows", async(req,res) => {
-    // console.log(req.body)
+    console.log(req.body)
     const movie = req.body.name
+    const date = req.body.showdate
     try {
         const theatres = await Tadmin.find({},{tname:1, _id:0})
-        const detail = await Show.find({movie:movie}).sort({theatreName:1});
+        const detail = await Show.find({movie:movie, date:date}).sort({theatreName:1});
         res.status(201).json({status:201,detail,theatres});
     } catch (error) {
         res.status(401).json({status:401,error});

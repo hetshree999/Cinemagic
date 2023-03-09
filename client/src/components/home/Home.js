@@ -17,9 +17,7 @@ const Home = () => {
 
   const history = useNavigate();
   const DashboardValid = async () => {
-    toast.success('Logged in!', {
-      position: "top-center"
-  })
+   
     let token = localStorage.getItem("usersdatatoken");
 
     const res = await fetch("http://localhost:5000/validuser", {

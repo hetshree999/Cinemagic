@@ -1,16 +1,23 @@
 import React, { Component } from 'react'
 import styles from './BookNow.module.css'
-class BookNow extends Component {
-  render() {
+const BookNow = () => {
+  const path = window.location.pathname
+  const array = path.split("/")
+  console.log(array)
+
     return (
       <div className={styles.maincontainer}>
-        <h2>Movie:</h2>
-        <select id="movie">
+        <h2>Movie: {array[2]}</h2>
+        <h2>Theatre: {array[3].replace("%20", " ")}</h2>
+        <h2>Time: {array[4]}</h2>
+        <h2>Price: Rs.{array[5]}</h2>
+        
+        {/* <select id="movie">
         <option value="220">Bhool Bhulaiya</option>
         <option value="320">--</option>
         <option value="250">--</option>
         <option value="260">--</option>
-      </select>
+      </select> */}
         <div className={styles.screen}></div>
             <div className={styles.showcase}>
               <ul>
@@ -152,5 +159,5 @@ class BookNow extends Component {
       </div>
     )
   }
-}
+
 export default BookNow

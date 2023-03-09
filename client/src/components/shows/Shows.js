@@ -1,27 +1,35 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import Navbar from '../navbar/Navbar'
 
 const Shows = () => {
-    const [show, setShow] = useState([{
+    const [shows, setShow] = useState([{
         movie:"",
-        show:"",
+        show:[],
         theatreName:"",
         date:""
-}])
+    }])
+
+    const [showdate, setShowdate] = useState('')
+
+    const setValue = ({currentTarget: input}) => {
+        setShowdate(input.value)
+    }
 
     const path = window.location.pathname
     const array = path.split("/")
     const name = array[2]
 
-    const getData = async() => {
+    const getData = async(e) => {
+      e.preventDefault()
         const data = await fetch("http://localhost:5000/getShows", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body:JSON.stringify({
-            name
+            name, showdate
           })
         })
         const res = await data.json();
@@ -37,20 +45,24 @@ const Shows = () => {
         }, 1000)
       }, [])
 
-      const display = show.map((item) => {
+      const display = shows.map((item, index) => {
         return(
             <div>
-            <p>{item.theatreName}</p>
+            <p key={index}>{item.theatreName}</p>
             {
-              item.show.map((x) => <div><p>{x.timing} - {x.price}</p></div>)
+              item.show.map((x, sIndex) => {return(<div key={sIndex}><NavLink to={`/book/${item.movie}/${item.theatreName}/${x.timing}/${x.price}`}
+              >{x.timing} - Rs.{x.price}</NavLink></div>)})
             }
-            
             </div>
         )
       })
   return (
     <div>
       {/* <Navbar /> */}
+      <form onSubmit={getData}>
+      <input type="date" name="date" onChange={setValue} ></input>
+      <button type='submit'>search</button>
+      </form>
       {display}
     </div>
   )
