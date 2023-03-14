@@ -53,11 +53,12 @@ const Login = () => {
         const res = await data.json();
         console.log(res)
         if(res.status === 201){
-            localStorage.setItem("usersdatatoken",res.result.token);
             if(res.result.userValid.role === "admin"){
+                localStorage.setItem("admindatatoken",res.result.token);
                 navigate("/adminDash")
             }else{
-                navigate("/dash")
+                localStorage.setItem("usersdatatoken",res.result.token);
+                navigate("/home")
             }
             
             setUser({...user,email:"",password:""});
@@ -105,7 +106,8 @@ const Login = () => {
                         </div>
                         
                         <input type="submit" className="btn" value="Login" onClick={userLogin} />
-                        <h6>Don't have an account?<NavLink to='/signin'>SignUp</NavLink></h6>
+                        <h6>Don't have an account?<NavLink to='/signin' style={{color:"black", display:"inline"}}>&nbsp;SignUp</NavLink></h6>
+                        <h6>Theatre admin?<NavLink to='/tlogin' style={{color:"black", display:"inline"}}>&nbsp;Click here to login</NavLink></h6>
                     </form>
                     <ToastContainer />
                 </div>

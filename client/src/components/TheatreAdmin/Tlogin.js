@@ -100,7 +100,7 @@ const Tlogin = () => {
                         </div>
                         
                         <input type="submit" className="btn" value="Login" onClick={userLogin} />
-                        <h6>Don't have an account?<NavLink to='/signin'>SignUp</NavLink></h6>
+                        <h6>Don't have an account?<NavLink to='/req'>SignUp</NavLink></h6>
                     </form>
                     <ToastContainer />
                 </div>

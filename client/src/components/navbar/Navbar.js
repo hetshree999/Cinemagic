@@ -49,7 +49,7 @@ const Navbar = () => {
                 <a href="#" className="logo">Cinemagic </a>
                 <nav className="navbar">
                     <div id="nav-close"></div>
-                    <NavLink to="/dash">Home</NavLink>
+                    <NavLink to="/home">Home</NavLink>
                     <NavLink to="/movies">Movies</NavLink>
                     <a href="#">Reviews</a>
                     <a href="#">Contact Us</a>

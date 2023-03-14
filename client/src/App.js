@@ -15,6 +15,7 @@ import Error from './components/error/Error';
 import BookNow from './components/booknow/BookNow';
 import Shows from './components/shows/Shows';
 import AdminDash from './components/admin/AdminDash';
+import Book from './components/booknow/Book';
 
 function App() {
   // const user = localStorage.getItem("userdatatoken");
@@ -25,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />}/>
         <Route path="signin" element={<Register />}/>
-        <Route path="dash" exact element={<Home />} />
+        <Route path="home" exact element={<Home />} />
         <Route path='/req' element={<Request />} />
         <Route path='/addmovie' element={<AddMovie />} />
         <Route path='/movies' element={<Movie />} />
@@ -37,6 +38,7 @@ function App() {
         <Route path='/book/:name/:theatre/:time/:price' element={<BookNow />} />
         <Route path='/shows/:name' element={<Shows />} />
         <Route path='/adminDash' element={<AdminDash />} />
+        <Route path='/seat' element={<Book />} />
         <Route path="*" element={<Error />} />
         {/* <Route path='description' element={<Description />} /> */}
       </Routes>

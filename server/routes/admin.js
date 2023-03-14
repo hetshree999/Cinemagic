@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const mongoose = require("mongoose")
 const Tadmin = mongoose.model('Theatreadmin')
+const Movie = require('../models/movieModel')
+const User = require('../models/userModel')
 
 router.get('/getRequest', (req, res)=>{
     Tadmin.find((err,data)=>{
@@ -12,5 +14,17 @@ router.get('/getRequest', (req, res)=>{
         }
     })
 });
+
+router.get('/adminDash', async(req,res)=>{
+    try{
+        const userCount = await User.count()
+        const movieCount = await Movie.count()
+        const tadminCount = await Tadmin.count()
+        res.status(201).json({status: 201, userCount, movieCount, tadminCount})
+    } catch(error){
+        res.status(422).json(error)
+        console.log("catch block error")
+    }
+})
 
 module.exports = router
