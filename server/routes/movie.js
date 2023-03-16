@@ -5,8 +5,6 @@ const Movie = require("../models/movieModel");
 const router = require("express").Router();
 const Show = require("../models/showModel")
 const Tadmin = mongoose.model('Theatreadmin')
-// const upload = require("../middleware/upload")
-
 
 router.get("/movies", async(req,res) => {
     try {
@@ -29,7 +27,6 @@ router.get("/dash", async(req,res) => {
 const Storage = multer.diskStorage({
     destination: './uploads',
     filename: (req, file, cb)=>{
-    //   cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
     cb(null, Date.now()+file.originalname)
     }
 })
@@ -93,16 +90,12 @@ router.post("/addMovie", upload, async(req,res) => {
 router.post("/getDetails", async(req,res) => {
     // console.log(req.body)
     const _id= req.body.id
-    // console.log(_id)
-    // const detail = Movie.findOne({_id:_id})
     try {
         const detail = await Movie.findOne({_id:_id});
         res.status(201).json({status:201,detail});
     } catch (error) {
         res.status(401).json({status:401,error});
     }
-    // console.log(detail)
-    // res.status(201).json({status:201, detail})
 })
 
 router.post("/getShows", async(req,res) => {
@@ -116,7 +109,6 @@ router.post("/getShows", async(req,res) => {
     } catch (error) {
         res.status(401).json({status:401,error});
     }
-    // console.log(detail)
-    // res.status(201).json({status:201, detail})
+
 })
 module.exports = router

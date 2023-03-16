@@ -3,7 +3,9 @@ var bcrypt = require("bcryptjs");
 const User = require("../models/userModel")
 const Movie = require("../models/movieModel");
 const TAdmin = require("../models/TAdminModel");
+const Booking = require("../models/bookModel")
 const authenticate = require("../middleware/authenticate")
+const tauthenticate = require("../middleware/tauthenticate")
 
 //---------User Registration-------------//
 
@@ -53,7 +55,6 @@ router.post("/login", async(req, res) => {
 
     try {
        const userValid = await User.findOne({email:email});
-    //    res.status(201).json({ status: 201, userValid })
         if(userValid){
 
             const isMatch = await bcrypt.compare(password,userValid.password);
@@ -62,23 +63,16 @@ router.post("/login", async(req, res) => {
             if(!isMatch){
                 res.status(422).json({ error: "invalid details"})
             }else{
-
-                // token generate
                 const token = await userValid.generateAuthtoken();
-                // console.log(token)
-
-                // cookiegenerate
                 res.cookie("usercookie",token,{
                     expires:new Date(Date.now()+9000000),
                     httpOnly:true,
                 });
-                // console.log(cookie)
 
                 const result = {
                     userValid,
                     token
                 }
-                // res.setHeader('userCookie','isLoggedIn=true')
                 res.status(201).json({status:201,result})
             }
         } else{
@@ -98,7 +92,6 @@ router.get("/validuser",authenticate,async(req,res)=>{
     } catch (error) {
         res.status(401).json({status:401,error});
     }
-    // console.log("done")
 });
 
 router.get("/logout",authenticate,async(req,res)=>{
@@ -117,6 +110,9 @@ router.get("/logout",authenticate,async(req,res)=>{
         res.status(401).json({status:401,error})
     }
 })
+
+
+
 
 
 module.exports = router

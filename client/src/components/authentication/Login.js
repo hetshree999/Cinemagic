@@ -58,6 +58,7 @@ const Login = () => {
                 navigate("/adminDash")
             }else{
                 localStorage.setItem("usersdatatoken",res.result.token);
+                localStorage.setItem("userid",res.result.userValid._id);
                 navigate("/home")
             }
             

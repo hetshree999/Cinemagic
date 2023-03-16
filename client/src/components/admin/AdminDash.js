@@ -59,7 +59,7 @@ const getData = async() => {
   // console.log(users)
 }
 const handleLogout = async () => {
-  let token = localStorage.getItem("usersdatatoken");
+  let token = localStorage.getItem("admindatatoken");
 
   const res = await fetch("http://localhost:5000/logout", {
       method: "GET",
@@ -100,6 +100,7 @@ useEffect(() => {
 	<p class="logo">Cinemagic</p>
   <a href="#" class="icon-a"><i class="fa fa-dashboard icons"></i> &nbsp;&nbsp;Dashboard</a>
   <a href="#"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Customers</a>
+  <NavLink to="/adminHome" class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Show request</NavLink>
   <NavLink to="/" class="icon-a" onClick={handleLogout}><i class="fa fa-sign-out"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</NavLink>
   <NavLink to="/addMovie" class="icon-a"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Show</NavLink>
   {/* <a href="#"class="icon-a"><i class="fa fa-list icons"></i> &nbsp;&nbsp;Projects</a>

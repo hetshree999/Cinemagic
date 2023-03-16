@@ -8,28 +8,31 @@ const authenticate = require("../middleware/tauthenticate")
 
 router.post("/request", async(req, res) => {
     console.log(req.body)
-        const { tname, temail, tpassword,cpassword } = req.body;
-        if (!tname || !temail || !tpassword || !cpassword) {
-            res.status(422).json({ error: "fill all the details" })
+    const { tname, temail, tpassword, cpassword, gstNum } = req.body;
+    if (!tname || !temail || !tpassword || !cpassword || !gstNum) {
+        res.status(422).json({ error: "fill all the details" })
+    }
+    try {
+        const preuser = await Tadmin.findOne({ temail: temail });
+        const gstUser = await Tadmin.findOne({ gstNum: gstNum }); 
+        if (preuser || gstUser) {
+            res.status(422).json({ error: "Something went wrong" })
+        } else if (tpassword !== cpassword)
+            res.status(422).json({ error: "Password and Confirm Password Not Match" })
+        else {
+            const finaltAdmin = new Tadmin({
+                tname,
+                temail,
+                tpassword,
+                gstNum
+            });
+            const storeData = await finaltAdmin.save();
+            res.status(201).json({ status: 201, storeData })
         }
-        try{
-            const preuser = await Tadmin.findOne({ temail: temail });
-            if (preuser) {
-                res.status(422).json({ error: "This Email is Already Exist" })
-            }
-            else if(tpassword !== cpassword)
-                res.status(422).json({ error: "Password and Confirm Password Not Match" })
-            else{
-                const finaltAdmin = new Tadmin({
-                    tname, temail, tpassword
-                });
-                const storeData = await finaltAdmin.save();
-                res.status(201).json({ status: 201, storeData })
-            }
-        }catch (error) {
-            res.status(422).json(error);
-            console.log("catch block error");
-        }
+    } catch (error) {
+        res.status(422).json(error);
+        console.log("catch block error");
+    }
 })
 
 router.post("/theatreadminlogin", async(req, res) => {
@@ -44,24 +47,22 @@ router.post("/theatreadminlogin", async(req, res) => {
        const userValid = await Tadmin.findOne({temail:email});
     //    res.status(201).json({ status: 201, userValid })
         if(userValid){
-
+            console.log("enter if")
             const isMatch = await Tadmin.findOne({tpassword:userValid.tpassword});
-            console.log(isMatch)
+            // console.log(isMatch)
 
             if(!isMatch){
                 res.status(422).json({ error: "invalid details"})
             }else{
-                console.log("login")
-                // token generate
+                const isValid = await Tadmin.findOne({tpassword:userValid.tpassword, isApproved: "approved"});
+                if(isValid){
+                    console.log("login")
                 const token = await userValid.generateAuthtoken();
-                // console.log(token)
-
-                // cookiegenerate
-                res.cookie("usercookie",token,{
-                    expires:new Date(Date.now()+9000000),
-                    httpOnly:true,
-                });
-                // console.log(cookie)
+                console.log("token")
+                // res.cookie("usercookie",token,{
+                //     expires:new Date(Date.now()+9000000),
+                //     httpOnly:true,
+                // });
 
                 const result = {
                     userValid,
@@ -69,6 +70,10 @@ router.post("/theatreadminlogin", async(req, res) => {
                 }
                 // res.setHeader('userCookie','isLoggedIn=true')
                 res.status(201).json({status:201,result})
+                } else {
+                    res.status(422).json({status: 422, error:"Your request has not been granted!!"})
+                }
+                
             }
         } else{
             res.status(422).json({error:"email doesn't exist"})
@@ -89,10 +94,25 @@ router.get("/options", async(req,res) => {
     }
 })
 
+// router.get("/validadmin",authenticate,async(req,res)=>{
+//     try {
+//         const ValidUserOne = await Tadmin.findOne({_id:req.userId});
+//         res.status(201).json({status:201,ValidUserOne});
+//     } catch (error) {
+//         res.status(401).json({status:401,error});
+//     }
+//     // console.log("done")
+// });
 router.get("/validadmin",authenticate,async(req,res)=>{
     try {
-        const ValidUserOne = await Tadmin.findOne({_id:req.userId});
-        res.status(201).json({status:201,ValidUserOne});
+        const ValidUserOne = await Tadmin.findOne({_id:req.userId, isApproved:'approved'});
+        if(ValidUserOne)
+            res.status(201).json({status:201,ValidUserOne});
+        else
+        {
+            // console.log("else block");
+            res.status(401).json({status:401, error: "You cannot add Show"})
+        }
     } catch (error) {
         res.status(401).json({status:401,error});
     }
@@ -117,7 +137,6 @@ router.get("/tlogout",authenticate,async(req,res)=>{
 })
 
 router.post("/addShow", async(req, res) => {
-    // console.log(req.body)
     let { movie, timing, price, theatreName, date } = req.body;
     
     // const array = timing.split(":")
@@ -136,12 +155,9 @@ router.post("/addShow", async(req, res) => {
                 {movie:movie, theatreName:theatreName, date:date},
                 {$push: { show: show }}
             )
-            console.log("update")
             res.status(201).json({ status:201 })
-            console.log("done")
         }
         else{
-            console.log("enter else")
             const newShow = new Show({
                 movie, show, theatreName, date
             })

@@ -51,8 +51,8 @@ userSchema.methods.generateAuthtoken = async function () {
             expiresIn: "1d"
         });
 
-        this.tokens = this.tokens.concat({ token: token23 });
-        await this.save();
+        // this.tokens = this.tokens.concat({ token: token23 });
+        // await this.save();
         return token23;
     } catch (error) {
         res.status(422).json(error)

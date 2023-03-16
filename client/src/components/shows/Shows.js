@@ -17,6 +17,8 @@ const Shows = () => {
         setShowdate(input.value)
     }
 
+    // const [seat, setSeat] = useState(0)
+
     const path = window.location.pathname
     const array = path.split("/")
     const name = array[2]
@@ -45,12 +47,14 @@ const Shows = () => {
         }, 1000)
       }, [])
 
+      // console.log(seat)
+
       const display = shows.map((item, index) => {
         return(
             <div>
             <p key={index}>{item.theatreName}</p>
             {
-              item.show.map((x, sIndex) => {return(<div key={sIndex}><NavLink to={`/book/${item.movie}/${item.theatreName}/${x.timing}/${x.price}`}
+              item.show.map((x, sIndex) => {return(<div key={sIndex}><NavLink to={`/book/${item.movie}/${item.theatreName}/${x.timing}/${x.price}/${showdate}`}
               >{x.timing} - Rs.{x.price}</NavLink></div>)})
             }
             </div>
@@ -61,6 +65,7 @@ const Shows = () => {
       {/* <Navbar /> */}
       <form onSubmit={getData}>
       <input type="date" name="date" onChange={setValue} ></input>
+      {/* <input type="text" name="seat" value={seat} onChange={(e) => setSeat(e.target.value)}></input> */}
       <button type='submit'>search</button>
       </form>
       {display}

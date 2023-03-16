@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
-// import './astyle.css'
+import './astyle.module.css'
 import axios from 'axios';
 
 const AdminHome = () => {
-  const user = localStorage.getItem("uaerdatatoken")
-  console.log(user);
   const[request, setRequest] = useState([''])
   const[clicked, setClicked] = useState(false)
   function handleSubmit(e){
@@ -20,32 +18,43 @@ const AdminHome = () => {
       })
   }
 
-  const Approve = () => {
+  const Approve = (id) => {
+    axios.put("http://localhost:5000/approve/"+id)
+    .then(function(response){
+      console.log("Called");
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+    console.log(id);
     console.log("Approve");
   }
 
-  const Decline = () => {
-    console.log("Decline");
+  const Decline = (id) => {
+    axios.put("http://localhost:5000/decline/"+id)
+    .then(function(response){
+      console.log("Decline Called");
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+    console.log(id);
+    console.log("Declined");
   }
 
   const display = request.map((item)=>{
     return(
       <>
-      {/* <div className='card-deck'>
-        <div className='row'>
-        <div className='col-sm-6'>
-      <div className='card' style={{width: '40rem', height:'15rem', padding:'1.5rem'}}> */}
-        <h4> Name: {item.tname} </h4>
-        <h5> Email: {item.temail}</h5>
-        <input type="button" value="Decline" onClick={Decline}/>
-        <input type="button" value="Approve" onClick={Approve}/>
-        {/*<h5> State: {item.state}</h5>
-        <h5> City: {item.city}</h5>
-        <h5> Description: {item.description}</h5> */}
-        {/* </div>
-        </div>
-      </div>
-      </div> */}
+        <tbody style={{border:'1px solid black'}}>
+          <tr key={item._id} style={{border:'1px solid black'}}>
+              <td style={{border:'1px solid black', color:'black'}}>{item.tname} </td>
+              <td style={{border:'1px solid black', color:'black'}}>{item.temail}</td>
+              <td style={{border:'1px solid black', color:'black'}}>{item.gstNum}</td>
+              <td style={{border:'1px solid black', color:'black'}}><input type="button" value="Decline" onClick={() => Decline(item._id)}/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="button" value="Approve" onClick={() => Approve(item._id)}/></td>
+          </tr>
+        </tbody>
       </>
     )
   })
@@ -53,13 +62,26 @@ const AdminHome = () => {
     return (
       <>
         <div>
-          <h1>Welcome Admin</h1>
-          {/* <button value="View Theater admin Requests"></button> */}
+          <center><h1>Welcome Admin</h1></center>
         </div>
         <input type="submit" className="btn" value="View Theater Admin requets" onClick={handleSubmit}/>
-        { clicked && display}
-        </>
-      )
+        { clicked && 
+          <>
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th style={{border:'1px solid black', color:'black'}} scope="col">TheaterName</th>
+                  <th style={{border:'1px solid black', color:'black'}} scope="col">Email</th>
+                  <th style={{border:'1px solid black', color:'black'}} scope="col">GST Number</th>
+                  <th style={{border:'1px solid black', color:'black'}} scope='col'>Options</th>
+                </tr>
+              </thead>
+              {display}
+            </table>
+          </>
+        }
+      </>
+    )
 }
 
 export default AdminHome

@@ -1,8 +1,7 @@
 import React, {useState} from "react"
 import { ToastContainer, toast } from 'react-toastify';
-import { NavLink } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
-import "../authentication/style.css"
+// import "./style.css"
 
 const Request = () => {
     const [TAdmin, setTAdmin] = useState({
@@ -10,6 +9,7 @@ const Request = () => {
         temail:"",
         tpassword:"",
         cpassword:"",
+        gstNum:""
     })
     const setValue = ({currentTarget: input}) => {
         setTAdmin({...TAdmin, [input.name]:input.value})
@@ -18,9 +18,9 @@ const Request = () => {
     const addTAdminData = async(e) => {
         e.preventDefault()
 
-        const {tname, temail, tpassword, cpassword}  = TAdmin;
+        const {tname, temail, tpassword, cpassword, gstNum}  = TAdmin;
 
-        if(tname === "" || tpassword === "" || temail === "" || cpassword === ""){
+        if(tname === "" || tpassword === "" || temail === "" || cpassword === ""|| gstNum===""){
             toast.warning("Please enter required field!", {
                 position: "top-center"
             });
@@ -40,29 +40,33 @@ const Request = () => {
                 position: "top-center"
             });
         }
+        else if(gstNum.length > 16 || gstNum.length < 15 || gstNum[13] !== 'Z'){
+            toast.warning("Please Enter Valid GST number!", {
+                position: "top-center"
+            });
+        }
         else{
-            // console.log("Registration done!!");
-            // console.log(TAdmin)
-            // const url = "http://localhost:5000/request"
-            const data = await fetch("http://localhost:5000/request", {
+            const url = "http://localhost:5000/request"
+            console.log(TAdmin)
+            const data = await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "Application/json",
                 },
                 body:JSON.stringify({
-                    tname, temail, tpassword, cpassword
+                    tname, temail, tpassword, cpassword, gstNum
                 })
             })
             const res = await data.json();
-            // console.log(res.error)
+            console.log(res.status)
             if (res.status === 201) {
                 toast.success('Request sent successfully!', {
                     position: "top-center"
                 })
-                setTAdmin({ ...TAdmin, tname: "", temail: "", tpassword: "", cpassword: "" });
-            } 
-            else if(res.error === "This Email is Already Exist"){
-                toast.warning("Email address already exist!", {
+                setTAdmin({ ...TAdmin, tname: "", temail: "", tpassword: "", cpassword: "", gstNum:"" });
+            }
+            else if(res.error === "Something went wrong"){
+                toast.warning("Something went wrong!", {
                     position: "top-center"
                 })
             }
@@ -85,7 +89,7 @@ const Request = () => {
                         <i className="fas fa-user"></i>
                     </div>
                     <div className="div">
-                        <input type="text" className="input" value={TAdmin.tname} onChange={setValue} placeholder="Theater name" name="tname"/>
+                        <input type="text" className="input" value={TAdmin.tname} onChange={setValue} placeholder="Theatername" name="tname"/>
                     </div>
                 </div>
                 <div className="input-div one">
@@ -94,6 +98,14 @@ const Request = () => {
                     </div>
                     <div className="div">
                         <input type="text" className="input" value={TAdmin.temail} onChange={setValue} placeholder="Email" name="temail"/>
+                    </div>
+                </div>
+                <div className="input-div one">
+                    <div className="i">
+                        <i className="fas fa-envelope"></i>
+                    </div>
+                    <div className="div">
+                        <input type="text" className="input" value={TAdmin.gstNum} onChange={setValue} placeholder="GST Number" name="gstNum"/>
                     </div>
                 </div>
                 <div className="input-div pass">
@@ -113,11 +125,8 @@ const Request = () => {
                     </div>
                 </div>
                 <input type="submit" className="btn" value="Request" onClick={addTAdminData} />
-                {/* <p>Already have an account?<NavLink to='/'>Login</NavLink></p> */}
-                <NavLink to='/tlogin'>SignUp</NavLink>
             </form>
-            
-            <ToastContainer />
+        <ToastContainer />
     </div>
     </div>
         </>

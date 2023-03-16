@@ -49,14 +49,19 @@ const Tlogin = () => {
                 email, password
             })
         });
-
+        console.log("done!!");
         const res = await data.json();
-        console.log(res)
+        console.log(res.status)
         if(res.status === 201){
             localStorage.setItem("tadmindatatoken",res.result.token);
             navigate("/thome")
             setUser({...user,email:"",password:""});
         } 
+        else if(res.status === 401){
+            toast.error(res.error, {
+                position: 'top-center'
+            });
+        }
         else if(res.error === "invalid details"){
             toast.error("Invalid password!", {
                 position: 'top-center'

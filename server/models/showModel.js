@@ -4,7 +4,7 @@ const showSchema = new mongoose.Schema({
     movie: { type: String, required: true },
     show: [{
         timing: { type: String, required: true },
-        price: { type: String, required: true },
+        price: { type: Number, required: true },
         booked: [],
     }],
     theatreName: { type: String, required: true },
@@ -12,4 +12,4 @@ const showSchema = new mongoose.Schema({
 });
 
 const Show = new mongoose.model("shows", showSchema);
-module.exports = Show;
+module.exports = Show

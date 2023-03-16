@@ -5,7 +5,7 @@ const Movie = require('../models/movieModel')
 const User = require('../models/userModel')
 
 router.get('/getRequest', (req, res)=>{
-    Tadmin.find((err,data)=>{
+    Tadmin.find({isApproved:"false"},(err,data)=>{
         if(err){
             res.status(500).json({error:err})
         }
@@ -26,5 +26,36 @@ router.get('/adminDash', async(req,res)=>{
         console.log("catch block error")
     }
 })
+
+router.put("/approve/:id", (req, res) => {
+    Tadmin.findOneAndUpdate({ _id: req.params.id }, { isApproved: 'approved' }, (err, data) => {
+        if (err) {
+            res.status(500).json({ error: err })
+        } else {
+            res.status(200).json(data)
+        }
+    })
+})
+
+
+router.put("/decline/:id", (req, res) => {
+    Tadmin.findOneAndUpdate({ _id: req.params.id }, { isApproved: 'declined' }, (err, data) => {
+        if (err) {
+            res.status(500).json({ error: err })
+        } else {
+            res.status(200).json(data)
+        }
+    })
+})
+
+router.get('/getRequest', (req, res) => {
+    Tadmin.find({ isApproved: "false" }, (err, data) => {
+        if (err) {
+            res.status(500).json({ error: err })
+        } else {
+            res.status(200).json(data)
+        }
+    })
+});
 
 module.exports = router

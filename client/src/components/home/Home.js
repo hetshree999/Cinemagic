@@ -45,13 +45,14 @@ useEffect(() => {
     setTimeout(() => {
         DashboardValid();
         setData(true)
-    })
+    }, 2000)
 
-}, [])
+},[])
 
 
   return (
-    <div>
+    <>
+      
       <Navbar />
       <div className={styles.container}>
         <h2>Book Tickets Online</h2>
@@ -59,8 +60,9 @@ useEffect(() => {
         <button className={styles.btn}>Book Now</button>
       </div>
       <Cards />
-      <ToastContainer />
-    </div>
+      <ToastContainer /> 
+
+    </>
   )
 }
 
