@@ -6,30 +6,31 @@ const Book = require("../models/bookModel")
 const Tadmin = mongoose.model('Theatreadmin')
 
 router.post("/addBooking", async(req,res) => {
-    // console.log(req.body)
-    const seat = req.body.seat
-    const movie = req.body.movie
-    const theatre = req.body.theatre
-    const time = req.body.time
-    const price = req.body.price
-    const total = req.body.total
+    
+    const seatnumber = req.body.seat
+    const moviename = (req.body.movie).replace("%20", " ")
+    const theatrename = (req.body.theatre).replace("%20", " ")
+    const showtime = req.body.time
+    const bookingprice = req.body.price
+    const totalprice = req.body.total
     const showdate = req.body.showdate
     const bookingdate = Date.now()
     const userid = req.body.userid
-    // console.log(seat)
+    console.log(seatnumber)
 
     try{
-        const findShow = await Show.findOne({movie:movie, theatreName:theatre, date:showdate, show:{$elemMatch:{timing:time}}})
+        const findShow = await Show.findOne({movie:moviename, theatreName:theatrename, date:showdate, show:{$elemMatch:{timing:showtime}}})
         if(findShow){
             await Show.findOneAndUpdate(
-                {movie:movie, theatreName:theatre, date:showdate, show:{$elemMatch:{timing:time}}},
-                {$push: { "show.$.booked": { $each: seat }}}
+                {movie:moviename, theatreName:theatrename, date:showdate, show:{$elemMatch:{timing:showtime}}},
+                {$push: { "show.$.booked": { $each: seatnumber }}}
             )
 
             const finalBooking = new Book({
-                movie, theatre, time, bookingdate, showdate, price, total, seat, userid  
+                moviename, theatrename, showtime, bookingdate, showdate, bookingprice, totalprice, seatnumber, userid  
             })
-            const storeData = finalBooking.save()
+            console.log(finalBooking)
+            const storeData = await finalBooking.save()
             res.status(201).json({ status:201, storeData })
             
         }
@@ -42,8 +43,8 @@ router.post("/addBooking", async(req,res) => {
 })
 
 router.post("/getBookedSeat", async(req,res) => {
-    const movie = req.body.movie
-    const theatre = req.body.theatre
+    const movie = (req.body.movie).replace("%20", " ")
+    const theatre = (req.body.theatre).replace("%20", " ")
     const time = req.body.time
     const price = req.body.price
     const showdate = req.body.showdate

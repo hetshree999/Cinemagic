@@ -100,7 +100,7 @@ router.post("/getDetails", async(req,res) => {
 
 router.post("/getShows", async(req,res) => {
     console.log(req.body)
-    const movie = req.body.name
+    const movie = (req.body.name).replace("%20", " ")
     const date = req.body.showdate
     try {
         const theatres = await Tadmin.find({},{tname:1, _id:0})

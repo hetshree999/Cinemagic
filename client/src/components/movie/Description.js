@@ -55,7 +55,7 @@ const Description = () => {
         <div className={styles.text}>
           <h2>Movie: {movie.movieName}</h2> 
           <h5>Description: {movie.description}</h5>
-          <h5>Date: {movie.date}</h5>
+          <h5>Date: {movie.releaseDate}</h5>
           <h5>Certification: {movie.certificate}</h5>
           <h5>Dimensions: {movie.dimensions}</h5>
           <h5>Duration: {movie.duration}</h5>  

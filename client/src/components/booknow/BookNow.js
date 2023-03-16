@@ -2,7 +2,8 @@ import React from 'react'
 import { useContext, useEffect } from 'react'
 import styles from './BookNow.module.css'
 import { LoginContext } from '../ContextProvider/Context'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react'
 
 const BookNow = () => {
@@ -25,6 +26,10 @@ const BookNow = () => {
     const res = await data.json()
     console.log(res)
     if(res.status === 201){
+      if(res.seat === null)
+      setBooked([])
+      
+      else
       setBooked(res.seat.show[0].booked)
       // console.log(seat)
     }
@@ -82,11 +87,17 @@ const BookNow = () => {
 
     const res = await data.json()
     console.log(res)
+
+    if(res.status === 201){
+      toast.success("Booking confirmed!", {
+        position: 'top-center'
+    });
+    }
   }
 
   useEffect(() => {
     getBookedSeat()
-  },[])
+  },[getBookedSeat])
 
   const display = seatValue.map((i) => {
     if(booked.includes(i)){
@@ -111,13 +122,13 @@ const BookNow = () => {
   })
     return (
       <div className={styles.maincontainer}>
-        <h2>Movie: {movie}</h2>
+        <h2>Movie: {movie.replace("%20", " ")}</h2>
         <h2>Theatre: {theatre.replace("%20", " ")}</h2>
         <h2>Time: {time}</h2>
         <h2>Price: Rs.{price}</h2>
         <h2>Date: {showdate}</h2>
         
-        <div className={styles.screen}></div>
+        <div className={styles.screen} ></div>
             <div className={styles.showcase}>
               <ul>
                 <li>
@@ -142,6 +153,7 @@ const BookNow = () => {
             </form>
             </div>
         <div className={styles.booknow_Btn} type="submit" onClick={submitForm}><button>Book Now</button></div>
+        <ToastContainer />
       </div>
     )
   }

@@ -42,11 +42,13 @@ body{
 
 .img img{
 	width: 500px;
+	/* position: fixed; */
 }
 
 
 form{
 	width: 360px;
+	/* position: fixed; */
 }
 
 .login-content img{
