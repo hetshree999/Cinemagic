@@ -60,7 +60,7 @@ const Description = () => {
           <h5>Dimensions: {movie.dimensions}</h5>
           <h5>Duration: {movie.duration}</h5>  
           {/* <h6>Watch trailer</h6> */}
-          <NavLink to={`/shows/${movie.movieName}`} className="descbtn">Book show</NavLink>   
+          <NavLink to={`/shows/${movie.movieName}`} className={styles.descbtn}>Book show</NavLink>   
         </div>
     </div>
     </div>

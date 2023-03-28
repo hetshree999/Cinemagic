@@ -75,24 +75,31 @@ const BookNow = () => {
     e.preventDefault()
     console.log(seat)
 
-    const data = await fetch("http://localhost:5000/addBooking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        seat, movie, theatre, time, price, total, showdate, userid
-      })
-    })
-
-    const res = await data.json()
-    console.log(res)
-
-    if(res.status === 201){
-      toast.success("Booking confirmed!", {
+    if(seat.length === 0){
+      toast.warning("Please select your seat!", {
         position: 'top-center'
-    });
+      })
     }
+    else{
+      const data = await fetch("http://localhost:5000/addBooking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          seat, movie, theatre, time, price, total, showdate, userid
+        })
+      })
+
+      const res = await data.json()
+      console.log(res)
+
+      if(res.status === 201){
+        toast.success("Booking confirmed!", {
+          position: 'top-center'
+      });
+      }
+  }
   }
 
   useEffect(() => {

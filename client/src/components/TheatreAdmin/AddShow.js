@@ -3,12 +3,14 @@ import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../ContextProvider/Context'
 import { ToastContainer, toast } from 'react-toastify';
+import {DayPicker} from 'react-day-picker'
+import 'react-day-picker/dist/style.css'
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './AddShow.module.css'
 
 const AddShow = () => {
     const { logindata, setLoginData } = useContext(LoginContext);
-    console.log(logindata)
+    // console.log(logindata)
     const [theatreName, setTheatreName] = useState('')
     const [data, setData] = useState(false);
     const history = useNavigate();
@@ -115,7 +117,14 @@ const AddShow = () => {
         })
     
     }, [])
-
+// const today = new Date()
+// const disablePastDate = () => {
+//     const today = new Date();
+//     const dd = String(today.getDate() ).padStart(2, "0");
+//     const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+//     const yyyy = today.getFullYear();
+//     return yyyy + "-" + mm + "-" + dd;
+// };
   return (
     <div>
         <form className="row g-3">
@@ -125,9 +134,10 @@ const AddShow = () => {
 		        {display}
 	        </select>
             <label htmlFor="date" className="form-label">Date</label>
-            <input type="date" name='date' value={show.date} onChange={setValue}/>
+            <DayPicker />
+            {/* <input type="date" name='date' value={show.date} onChange={setValue} min = {disablePastDate()}/> */}
             <label htmlFor="timing" className="form-label">Timing</label>
-            <input type="time" name='timing' value={show.timing} onChange={setValue}/>
+            <input type="time" name='timing' value={show.timing}  onChange={setValue}/>
             <label htmlFor="price" className="form-label">Price</label>
             <input type="text" name='price' value={show.price} onChange={setValue}/>
             

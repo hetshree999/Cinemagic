@@ -22,10 +22,17 @@
   .descbtn{
     width:10rem;
     height: 3.5rem;
-    padding:0.7rem; 
+    text-align: center;
+    padding-top: 0.7rem;
     font-size:1.2rem;
     color: #fff;
     background-color: #002541;
     border-radius: 0.4rem;
     cursor: pointer;
+  }
+
+  .descbtn:hover{
+    background-color: #fff;
+    color: #002541;
+    border: 3px solid #002541;
   }

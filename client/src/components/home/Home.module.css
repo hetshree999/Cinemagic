@@ -1,54 +1,52 @@
-.container{
-    margin-top: 2rem;
-    background-image:
-    url('/public/images/cinema.jpeg');
-    background-size: cover;
-    height: 95vh;
-    /* width:150vw; */
-    width: 100%;
-    background-repeat: no-repeat;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+.home{
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap:1.5rem;
+    min-height: 100vh;
+    align-items: center;
+    padding : 1rem;
 }
-.container h2,p{
-    font-size: 40px;
-    margin-top:-450px;
-    margin-left: 50px;
-    color: black;
-    display: grid;
-    justify-content: space-between;
+.home .hcontent{
+    flex: 1 1 40rem;
+    padding-top: 1rem;
+    padding-left: 4rem;
 }
-.container h2{
-    margin-left: 750px;
-    padding-top: 700px;
-    padding-right: -700px;
-    /* margin-top:-450px; */
-    font-size: 55px;
-    color: black;
+.home .himage{
+    flex: 1 1 40rem;
+}
+.home .himage img{
+    width: 90%;
+    animation: float 3s linear infinite;
+}
+@keyframes float{
+    0%,100%{
+        transform: translateX(0rem);
+    }
+    50%{
+        transform: translateX(3rem);
+    }
+}
+
+.home .hcontent h5{
+    font-size: 4rem;
+    color: rgb(2, 4, 125);
     overflow: hidden;
+    float: initial;
 }
-p{
-    font-weight: 500;
-    margin-left: 750px;
-    font-size: 19px;
-    margin-top: 5px;
-    margin-right: 10px;
-    grid-template-columns: 1.5fr 0.5fr;
-    
+.home .hcontent p{
+    font-size: 1.2rem;
 }
-.container button {
-    width:200px;
-    margin-top:20px;
-    margin-left: 900px;
-    padding-top: 20px;
-    border: 0.2rem solid navy;
-    border-radius: 25px;
-    color:black;
+.hbtn{
+    display: inline-block;
+    padding: 0.8rem 3rem;
+    border: 0.1rem solid black;
     cursor: pointer;
     font-size: 1rem;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    background: transparent;
-  }
-.container button:hover {
-    background:rgb(157, 157, 244);
+    background-repeat: 0.5rem;
+    position: relative;
     color: black;
+    font-weight: 800;
 }

@@ -1,0 +1,24 @@
+.cmain{
+  max-width: 320px;
+  margin: auto 1rem;
+  text-align: center;
+  font-family: arial;
+  margin-left: 100px;
+}
+.ur{
+    margin-left: 550px;
+    padding-bottom: 15px;
+    font-size: 2.5rem;
+    overflow: hidden;
+    text-decoration:underline rgb(0, 0, 168) ;
+}
+.cmain .cimage img {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+}
+.cheading{
+    /* margin-left: 1.9rem; */
+    font-size: 1.5rem;
+    overflow: hidden;
+}
