@@ -32,7 +32,7 @@
   }
 
   .descbtn:hover{
-    background-color: #fff;
-    color: #002541;
-    border: 3px solid #002541;
+    /* background-color: #fff; */
+    color: #fba12e;
+    /* border: 3px solid #002541; */
   }

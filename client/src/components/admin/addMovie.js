@@ -70,53 +70,9 @@ const AddMovie = () => {
 
     return(
         <>
-            {/* <button onClick={handleClick}>Add</button>
-                {Array.from(Array(counter)).map((c, index) => {
-                return <>
-                <br></br>
-                  <label for="castname" className="form-label">Name</label>
-                  <input key={c} type="text"></input>
-                  <br></br>
-                  <label for="castname" className="form-label">Image</label>
-                  <input key={c} type="file"></input>
-                        </>;
-                })} */}
-                {/* <div classNameName="Container">
-            <form action="">
-                MovieName : <input type="text" name="movieName" placeholder="Movie Name"/>
-                
-                Relase Date : <input type="date" id="release" name="releaseDate"/>
-                <br></br>
-                Choose a Certificate : <select name="certificate" id="certificate">
-                    <option value="U/A">U/A</option>
-                    <option value="U">U</option>
-                    <option value="A">A</option>
-                    <option value="filmdirector">Film director S</option>
-                </select>
-                
-                Duration : <input type="text" name="Duration" placeholder="03h 20m"/>
-                
-                Dimensions : <select name="dimensions" id="d">
-                    <option value="2D">2D</option>
-                    <option value="3D">3D</option>
-                </select>
-                <br></br>
-                Movie Poster :<input type="file" name="image" id="image"/>
-                
-                Price : <input type="text" name="price" placeholder="Enter Price"/>
-                
-                Description :<textarea type="text" rows="4" cols="50" name="description" placeholder="Enter description"/>
-                
-                Genre : <input type="text" name="genre" Placeholder="Genre"/>
-                <br></br>
-                Cast Members: <br></br>
-                CastName : <input type="text" name="castName" Placeholder="Cast Name"/>
-                CastImage : <input type="file" name="castImage" id="castImage"/>
-                CastProf : <input type="text" name="castProf" placeholder="castProf"/>
-
-            </form>
-            </div> */}
-            <form className="row g-3" method="post" >
+            <center>
+            <form className="row g-3" method="post" style={{marginTop:"25px"}} >
+            <h5 className="amheading" style={{fontSize:"2rem"}}>Add New Movie</h5>
   <div className="col-md-6">
     <label htmlFor="movieName" className="form-label">Movie name</label>
     <input type="text" name="movieName" className="form-control" onChange={setValue} value={movie.movieName}/>
@@ -176,6 +132,7 @@ const AddMovie = () => {
     <button type="submit" className="btn btn-primary" onClick={addMovieData}>Add Movie</button>
   </div>
 </form>
+</center>
 <ToastContainer />
         </>
     )

@@ -11,7 +11,9 @@ router.post("/addBooking", async(req,res) => {
     const moviename = (req.body.movie).replace("%20", " ")
     const theatrename = (req.body.theatre).replace("%20", " ")
     const showtime = req.body.time
-    const bookingprice = req.body.price
+    const normalprice = req.body.normalPrice
+    const executiveprice = req.body.executivePrice
+    const premiumprice = req.body.premiumPrice
     const totalprice = req.body.total
     const showdate = req.body.showdate
     const bookingdate = Date.now()
@@ -27,7 +29,7 @@ router.post("/addBooking", async(req,res) => {
             )
 
             const finalBooking = new Book({
-                moviename, theatrename, showtime, bookingdate, showdate, bookingprice, totalprice, seatnumber, userid  
+                moviename, theatrename, showtime, bookingdate, showdate, normalprice, executiveprice, premiumprice, totalprice, seatnumber, userid  
             })
             console.log(finalBooking)
             const storeData = await finalBooking.save()
@@ -43,13 +45,15 @@ router.post("/addBooking", async(req,res) => {
 })
 
 router.post("/getBookedSeat", async(req,res) => {
+    console.log(req.body)
     const movie = (req.body.movie).replace("%20", " ")
     const theatre = (req.body.theatre).replace("%20", " ")
     const time = req.body.time
-    const price = req.body.price
+    // const price = req.body.price
     const showdate = req.body.showdate
     try{
-        const seat = await Show.findOne({movie:movie, theatreName:theatre, date:showdate, show:{$elemMatch:{timing:time}}},{show:{booked:1},_id:0})
+        // const seat = await Show.findOne({movie:movie, theatreName:theatre, date:showdate, show:{$elemMatch:{timing:time}}},{show:{booked:1, normalPrice:1,executivePrice:1,premiumPrice:1},_id:0})
+        const seat = await Show.findOne({movie:movie, theatreName:theatre, date:showdate, show:{$elemMatch:{timing:time}}},{show:{booked:1, normalPrice:1, executivePrice:1, premiumPrice:1}})
         res.status(201).json({status:201,seat});
     } catch(error) {
         res.status(422).json(error)

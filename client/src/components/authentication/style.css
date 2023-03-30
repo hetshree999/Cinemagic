@@ -90,6 +90,7 @@ form{
 .input-div > div{
     position: relative;
 	height: 45px;
+	overflow: hidden;
 }
 
 .input-div > div > h5{
@@ -182,11 +183,12 @@ a:hover{
 	cursor: pointer;
 	transition: .5s;
 }
+
 .btn:hover{
 	background-position: right;
+	background-color: #002541;
 	color: #fba12e;
 }
-
 
 @media screen and (max-width: 1050px){
 	.container{

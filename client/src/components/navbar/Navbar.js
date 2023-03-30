@@ -35,6 +35,7 @@ const Navbar = () => {
         if (data.status == 201) {
             console.log("use logout");
             localStorage.removeItem("usersdatatoken");
+            localStorage.removeItem("userid");
             setLoginData(false)
             history("/");
         } else {
@@ -51,9 +52,10 @@ const Navbar = () => {
                     <div id="nav-close"></div>
                     <NavLink to="/home">Home</NavLink>
                     <NavLink to="/movies">Movies</NavLink>
-                    <a href="#">Reviews</a>
-                    <a href="#">Contact Us</a>
-                    <a href="#">About Us</a>
+                    <NavLink to="/profile">Profile</NavLink>
+                    <NavLink to="/history">History</NavLink>
+                    {/* <a href="#">Reviews</a> */}
+
                     <NavLink to="/" onClick={handleLogout}>Logout</NavLink>
                 </nav>
             </header>

@@ -10,11 +10,49 @@ const AdminDash = () => {
 
   const { logindata, setLoginData } = useContext(LoginContext);
   // console.log(logindata)
-  
-  const [data, setData] = useState(false);
+  const [data, setData] = useState(false)
+  const [movie, setMovie] = useState([{
+    movieName:"",
+    dimensions:"",
+    releaseDate:"",
+    description:"",
+    certificate:"",
+    duration:""
+  }]);
   const [users, setUsers] = useState(0)
   const [movies, setMovies] = useState(0)
   const [theatreAdmins, setTheatreAdmins] = useState(0)
+
+  const getMovies = async () => {
+    const res = await fetch("http://localhost:5000/getMovies" , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        const data = await res.json();
+        console.log(data)
+        // setUser({name:data.user.name, email:data.user.email})
+        setMovie(data)
+  }
+
+  const display = movie.map((d)=>{
+    console.log(d);
+    return(
+      <>
+        <tbody style={{border:'1px solid black'}}>
+          <tr key={d._id} style={{border:'1px solid black'}}>
+              <td>{d.movieName} </td>
+              <td><NavLink to={`/updateMovie/${d._id}`} style={{width:"100px", borderRadius: "25px"}}>Update</NavLink></td>
+              {/* <td style={{border:'1px solid black', color:'black'}}>{m.theatrename}</td>
+              <td style={{border:'1px solid black', color:'black'}}>{m.showtime}</td>
+              <td style={{border:'1px solid black', color:'black'}}>{m.bookingdate.split("T")[0]} </td>
+              <td style={{border:'1px solid black', color:'black'}}>{m.showdate.split("T")[0]}</td> */}
+          </tr>
+        </tbody>
+      </>
+    )
+  })
 
   const history = useNavigate();
   const DashboardValid = async () => {
@@ -83,16 +121,16 @@ const handleLogout = async () => {
   }
 }
 
+    useEffect(() => {
+        setTimeout(() => {
+            getData();
+            DashboardValid();
+            setData(true)
+            getMovies()
+            
+        })
 
-useEffect(() => {
-    setTimeout(() => {
-        getData();
-        DashboardValid();
-        setData(true)
-        
-    })
-
-}, [])
+    }, [])
 
   return (
     <div>
@@ -102,7 +140,7 @@ useEffect(() => {
   <a href="#"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Customers</a>
   <NavLink to="/adminHome" class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Show request</NavLink>
   <NavLink to="/" class="icon-a" onClick={handleLogout}><i class="fa fa-sign-out"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</NavLink>
-  <NavLink to="/addMovie" class="icon-a"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Show</NavLink>
+  <NavLink to="/addMovie" class="icon-a"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Movie</NavLink>
   {/* <a href="#"class="icon-a"><i class="fa fa-list icons"></i> &nbsp;&nbsp;Projects</a>
   <a href="#"class="icon-a"><i class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;Orders</a>
   <a href="#"class="icon-a"><i class="fa fa-tasks icons"></i> &nbsp;&nbsp;Inventory</a>
@@ -136,46 +174,9 @@ useEffect(() => {
 			<table>
   <tr>
     <th>Movie Name</th>
-    <th>Cinema</th>
-    <th>Showtime</th>
-    <th>Price</th>
+    <th>Options</th>
   </tr>
-  <tr>
-    <td>ABC</td>
-    <td>ABC</td>
-    <td>ABC</td>
-    <td>ABC</td>
-  </tr>
-  <tr>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
-  <tr>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
-  <tr>
-  <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
-  <tr>
-  <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
-  <tr>
-  <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
+  {display}
 </table>
 		</div>
 	</div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import styles from "./shows.module.css"
 import Navbar from '../navbar/Navbar'
 
 const Shows = () => {
@@ -42,34 +43,46 @@ const Shows = () => {
       }
 
     useEffect(() => {
-        setTimeout(() => {
           getData()
-        }, 1000)
+          var today = new Date().toISOString().split('T')[0];
+          console.log(today);
+          document.getElementsByName("date")[0].setAttribute('min', today);
       }, [])
 
       // console.log(seat)
 
       const display = shows.map((item, index) => {
         return(
-            <div>
-            <p key={index}>{item.theatreName}</p>
+          <center>
+            <tr>
+              <td>
+            <p key={index} style={{color:"black"}}>{item.theatreName}</p>
+            </td>
             {
-              item.show.map((x, sIndex) => {return(<div key={sIndex}><NavLink to={`/book/${item.movie}/${item.theatreName}/${x.timing}/${x.price}/${showdate}`}
-              >{x.timing} - Rs.{x.price}</NavLink></div>)})
+              item.show.map((x, sIndex) => {return(<td ><div key={sIndex}><NavLink to={`/book/${item.movie}/${item.theatreName}/${x.timing}/${showdate}`}
+              style={{color:"black"}}>{x.timing}</NavLink></div></td>)})
             }
-            </div>
+            </tr>
+          </center>
         )
       })
   return (
-    <div>
+    <center>
+    <div className={styles.date}>
       {/* <Navbar /> */}
       <form onSubmit={getData}>
-      <input type="date" name="date" onChange={setValue} ></input>
+      {/* <input type="date" name="date" onChange={setValue} ></input> */}
+      <div className={styles.heading}>
+      <h3>Select date</h3>
+      </div>
+      <input type="date" name="date" onChange={setValue} />
       {/* <input type="text" name="seat" value={seat} onChange={(e) => setSeat(e.target.value)}></input> */}
-      <button type='submit'>search</button>
+      <button type='submit' style={{marginLeft:"1rem"}}>search</button>
+      <hr style={{width:"100%"}}></hr>
       </form>
       {display}
     </div>
+    </center>
   )
 }
 

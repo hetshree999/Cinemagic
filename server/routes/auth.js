@@ -94,6 +94,30 @@ router.get("/validuser",authenticate,async(req,res)=>{
     }
 });
 
+router.get("/findUser/:id", async(req, res) => {
+    const user = await User.findOne({ _id: req.params.id })
+    res.status(201).json({ status: 201, user })
+})
+
+router.put("/updateUser/:id", async(req, res) => {
+    console.log(req.body);
+    User.findOneAndUpdate({ _id: req.params.id }, { name: req.body.name, email: req.body.email }, (err, data) => {
+            if (err) {
+                res.status(500).json({ status: 500, error: err })
+            } else {
+                res.status(200).json({ status: 200, data })
+            }
+        })
+        // res.status(201).json({ status: 201, user })
+})
+
+router.get("/findHistory/:id", async(req, res) => {
+    const bookings = await Booking.find({ userid: req.params.id })
+    console.log(bookings);
+    res.status(201).json({ status: 201, bookings })
+        // Booking.
+})
+
 router.get("/logout",authenticate,async(req,res)=>{
     try {
         req.rootUser.tokens =  req.rootUser.tokens.filter((curelem)=>{

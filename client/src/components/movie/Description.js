@@ -9,7 +9,7 @@ const Description = () => {
 
   const [movie,setMovie] = useState({
     movieName:"",
-    date:"",
+    releaseDate:"",
     duration:"",
     description:"",
     genre:"",
@@ -55,12 +55,13 @@ const Description = () => {
         <div className={styles.text}>
           <h2>Movie: {movie.movieName}</h2> 
           <h5>Description: {movie.description}</h5>
-          <h5>Date: {movie.releaseDate}</h5>
+          <h5>Date: {movie.releaseDate.split("T")[0]}</h5>
           <h5>Certification: {movie.certificate}</h5>
           <h5>Dimensions: {movie.dimensions}</h5>
           <h5>Duration: {movie.duration}</h5>  
           {/* <h6>Watch trailer</h6> */}
           <NavLink to={`/shows/${movie.movieName}`} className={styles.descbtn}>Book show</NavLink>   
+            
         </div>
     </div>
     </div>

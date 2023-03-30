@@ -6,7 +6,9 @@ const BookSchema = new mongoose.Schema({
     showtime: { type: String, required: true },
     bookingdate: { type:Date, required:true },
     showdate: { type:Date, required:true },
-    bookingprice: {type: Number, required: true},
+    normalprice: { type: Number, required: true },
+    executiveprice: { type: Number, required: true },
+    premiumprice: { type: Number, required: true },
     totalprice: {type: Number, required: true},
     seatnumber: [],
     userid: { type: String, required:true }

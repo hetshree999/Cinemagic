@@ -1,0 +1,10 @@
+/* .date h3{
+    background-color: ;
+} */
+
+.date .heading h3{
+    background-color: #002541;
+    padding: 1rem;
+    color: white;
+    width: 100%;
+}

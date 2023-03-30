@@ -16,6 +16,11 @@ import BookNow from './components/booknow/BookNow';
 import Shows from './components/shows/Shows';
 import AdminDash from './components/admin/AdminDash';
 import Book from './components/booknow/Book';
+import Payment from './components/payment/Payment';
+import Profile from './components/authentication/Profile';
+import History from './components/authentication/history';
+import FinalPay from './components/payment/FinalPay';
+import UpdateMovie from './components/admin/updateMovie'
 
 function App() {
   // const user = localStorage.getItem("userdatatoken");
@@ -35,11 +40,16 @@ function App() {
         <Route path='/tlogin' element={<Tlogin />} />
         <Route path='/admin' element={<AdminHome />} />
         <Route path='/thome' element={<Thome />} />
-        <Route path='/book/:name/:theatre/:time/:price/:seat' element={<BookNow />} />
+        <Route path='/book/:name/:theatre/:time/:seat' element={<BookNow />} />
         <Route path='/shows/:name' element={<Shows />} />
         <Route path='/adminDash' element={<AdminDash />} />
         <Route path='/adminHome' element={<AdminHome />} />
         <Route path='/seat' element={<Book />} />
+        <Route path='/pay' element={<Payment />} />
+        <Route path='/finalpay' element={<FinalPay />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/history' element={<History />} />
+        <Route path='/updateMovie/:id' element={<UpdateMovie />} />
         <Route path="*" element={<Error />} />
         {/* <Route path='description' element={<Description />} /> */}
       </Routes>

@@ -27,6 +27,16 @@ router.get('/adminDash', async(req,res)=>{
     }
 })
 
+router.get('/getMovies', (req, res) => {
+    Movie.find({}, (err, data) => {
+        if (err) {
+            res.status(500).json({ error: err })
+        } else {
+            res.status(200).json(data)
+        }
+    })
+})
+
 router.put("/approve/:id", (req, res) => {
     Tadmin.findOneAndUpdate({ _id: req.params.id }, { isApproved: 'approved' }, (err, data) => {
         if (err) {

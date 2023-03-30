@@ -1,15 +1,25 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import "./style.css"
+import styles from "./req.module.css"
 
 const Request = () => {
+    useEffect(() => {
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("inspectionDate")[0].setAttribute('min', today);
+      });
+
     const [TAdmin, setTAdmin] = useState({
         tname:"",
         temail:"",
         tpassword:"",
         cpassword:"",
-        gstNum:""
+        gstNum:"",
+        address:"",
+        city:"",
+        state:"",
+        pincode:"",
+        inspectionDate:""
     })
     const setValue = ({currentTarget: input}) => {
         setTAdmin({...TAdmin, [input.name]:input.value})
@@ -18,9 +28,9 @@ const Request = () => {
     const addTAdminData = async(e) => {
         e.preventDefault()
 
-        const {tname, temail, tpassword, cpassword, gstNum}  = TAdmin;
+        const {tname, temail, tpassword, cpassword, gstNum, address, city, state, pincode, inspectionDate}  = TAdmin;
 
-        if(tname === "" || tpassword === "" || temail === "" || cpassword === ""|| gstNum===""){
+        if(tname === "" || tpassword === "" || temail === "" || cpassword === ""|| gstNum==="" || address==="" || city==="" || state==="" || city==="" || pincode==="" || inspectionDate===""){
             toast.warning("Please enter required field!", {
                 position: "top-center"
             });
@@ -45,6 +55,11 @@ const Request = () => {
                 position: "top-center"
             });
         }
+        else if(pincode.length > 7 || pincode.length<6){
+            toast.warning("Please Enter Valid Pincode!", {
+                position: "top-center"
+            });
+        }
         else{
             const url = "http://localhost:5000/request"
             console.log(TAdmin)
@@ -54,7 +69,7 @@ const Request = () => {
                     "Content-Type": "Application/json",
                 },
                 body:JSON.stringify({
-                    tname, temail, tpassword, cpassword, gstNum
+                    tname, temail, tpassword, cpassword, gstNum, address, city, state, pincode, inspectionDate
                 })
             })
             const res = await data.json();
@@ -63,7 +78,7 @@ const Request = () => {
                 toast.success('Request sent successfully!', {
                     position: "top-center"
                 })
-                setTAdmin({ ...TAdmin, tname: "", temail: "", tpassword: "", cpassword: "", gstNum:"" });
+                setTAdmin({ ...TAdmin, tname: "", temail: "", tpassword: "", cpassword: "", gstNum:"", address:"", city:"", state:"", pincode:"", inspectionDate:"" });
             }
             else if(res.error === "Something went wrong"){
                 toast.warning("Something went wrong!", {
@@ -75,50 +90,108 @@ const Request = () => {
 
     return(
         <>
-        <div className="container">
-        <div className="img">
+        <div className={styles.a}>
+        <div className={styles.container}>
+        {/* <div className="img">
         <img src="./images/admin.jpeg" alt="bg"/>
         <br></br>             
-        </div>
-        <div className="login-content">
+        </div> */}
+        <div className={styles.loginContent}>
             <form action="">
                 <img src="./images/avt.png" alt="avatar"/>
-                <h2 className="title">Request</h2>
-                <div className="input-div one">
-                    <div className="i">
+                <h2 className={styles.title}>Request</h2>
+                <div className={styles.inputdiv}>
+                    <div className={styles.inputdivOne}>
+                    <div className={styles.i}>
                         <i className="fas fa-user"></i>
                     </div>
-                    <div className="div">
-                        <input type="text" className="input" value={TAdmin.tname} onChange={setValue} placeholder="Theatername" name="tname"/>
                     </div>
+                    <div className={styles.div}>
+                        <input type="text" className={styles.input} value={TAdmin.tname} onChange={setValue} placeholder="Theatername" name="tname"/>
+                    </div>
+                    
                 </div>
-                <div className="input-div one">
-                    <div className="i">
+                <div className={styles.inputdiv}>
+                    <div className={styles.inputdivTwo}>
+                    <div className={styles.i}>
                         <i className="fas fa-envelope"></i>
                     </div>
-                    <div className="div">
-                        <input type="text" className="input" value={TAdmin.temail} onChange={setValue} placeholder="Email" name="temail"/>
+                    </div>
+                    <div className={styles.div}>
+                        <input type="text" className={styles.input} value={TAdmin.temail} onChange={setValue} placeholder="Email" name="temail"/>
                     </div>
                 </div>
-                <div className="input-div one">
-                    <div className="i">
-                        <i className="fas fa-envelope"></i>
+                <div className={styles.inputdiv}>
+                    <div className={styles.inputdivOne}>
+                    <div className={styles.i}>
+                        <i className="fa fa-key"></i>
                     </div>
-                    <div className="div">
-                        <input type="text" className="input" value={TAdmin.gstNum} onChange={setValue} placeholder="GST Number" name="gstNum"/>
+                    </div>
+                    <div className={styles.div}>
+                        <input type="text" className={styles.input} value={TAdmin.gstNum} onChange={setValue} placeholder="GST Number" name="gstNum"/>
                     </div>
                 </div>
-                <div className="input-div pass">
-                    <div className="i"> 
+                <div className={styles.inputdiv}>
+                    <div className={styles.inputdivOne}>
+                    <div className={styles.i}> 
+                    <i class="fa fa-address-card-o" style={{color:"#858c99"}}></i>
+                        
+                    </div>
+                    </div>
+                    <div className="div">
+                        <input type="text" className="input" value={TAdmin.address} onChange={setValue} placeholder="Address" name="address"/>
+                    </div>
+                </div>
+                <div className={styles.inputdiv}>
+                    <div className={styles.inputdivOne}>
+                    <div className={styles.i}> 
+                    {/* <i class="fa fa-address-card-o" style={{color:"#858c99"}}></i> */}
+                        
+                    </div>
+                    </div>
+                    <div className="div">
+                        <input type="text" className="input" value={TAdmin.city} onChange={setValue} placeholder="City" name="city"/>
+                    </div>
+                </div>
+                <div className={styles.inputdiv}>
+                    <div className={styles.inputdivOne}>
+                    <div className={styles.i}> 
+                    {/* <i class="fa fa-address-card-o" style={{color:"#858c99"}}></i> */}
+                        
+                    </div>
+                    </div>
+                    <div className="div">
+                        <input type="text" className="input" value={TAdmin.state} onChange={setValue} placeholder="State" name="state"/>
+                    </div>
+                </div>
+                <div className={styles.inputdiv}>
+                    <div className={styles.inputdivOne}>
+                    <div className={styles.i}> 
+                    {/* <i class="fa fa-address-card-o" style={{color:"#858c99"}}></i> */}
+                        
+                    </div>
+                    </div>
+                    <div className="div">
+                        <input type="number" className="input" value={TAdmin.pincode} onChange={setValue} placeholder="Pincode" name="pincode"/>
+                    </div>
+                </div>
+                <label>Date Of Inspection</label>
+                <input name="inspectionDate" value={TAdmin.inspectionDate} onChange={setValue} type="date"/>  
+                <div className={styles.inputdiv}>
+                    <div className={styles.inputdivOne}>
+                    <div className={styles.i}> 
                         <i className="fas fa-lock"></i>
+                    </div>
                     </div>
                     <div className="div">
                         <input type="password" className="input" value={TAdmin.tpassword} onChange={setValue} placeholder="Password" name="tpassword"/>
                     </div>
                 </div>
-                <div className="input-div pass">
-                    <div className="i"> 
+                <div className={styles.inputdiv}>
+                    <div className={styles.inputdivOne}>
+                    <div className={styles.i}> 
                         <i className="fas fa-lock"></i>
+                    </div>
                     </div>
                     <div className="div">
                         <input type="password" className="input" value={TAdmin.cpassword} onChange={setValue} placeholder="Confirm password" name="cpassword"/>
@@ -127,6 +200,7 @@ const Request = () => {
                 <input type="submit" className="btn" value="Request" onClick={addTAdminData} />
             </form>
         <ToastContainer />
+    </div>
     </div>
     </div>
         </>

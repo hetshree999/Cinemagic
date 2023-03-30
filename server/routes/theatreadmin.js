@@ -7,14 +7,13 @@ const authenticate = require("../middleware/tauthenticate")
 // const Tadmin = require("../models/TadminModel")
 
 router.post("/request", async(req, res) => {
-    console.log(req.body)
-    const { tname, temail, tpassword, cpassword, gstNum } = req.body;
-    if (!tname || !temail || !tpassword || !cpassword || !gstNum) {
+    const { tname, temail, tpassword, cpassword, gstNum, address, city, state, pincode, inspectionDate } = req.body;
+    if (!tname || !temail || !tpassword || !cpassword || !gstNum || !address || !city || !state || !pincode || !inspectionDate) {
         res.status(422).json({ error: "fill all the details" })
     }
     try {
         const preuser = await Tadmin.findOne({ temail: temail });
-        const gstUser = await Tadmin.findOne({ gstNum: gstNum }); 
+        const gstUser = await Tadmin.findOne({ gstNum: gstNum });
         if (preuser || gstUser) {
             res.status(422).json({ error: "Something went wrong" })
         } else if (tpassword !== cpassword)
@@ -24,7 +23,12 @@ router.post("/request", async(req, res) => {
                 tname,
                 temail,
                 tpassword,
-                gstNum
+                gstNum,
+                address,
+                city,
+                state,
+                pincode,
+                inspectionDate
             });
             const storeData = await finaltAdmin.save();
             res.status(201).json({ status: 201, storeData })
@@ -36,7 +40,7 @@ router.post("/request", async(req, res) => {
 })
 
 router.post("/theatreadminlogin", async(req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -47,7 +51,6 @@ router.post("/theatreadminlogin", async(req, res) => {
        const userValid = await Tadmin.findOne({temail:email});
     //    res.status(201).json({ status: 201, userValid })
         if(userValid){
-            console.log("enter if")
             const isMatch = await Tadmin.findOne({tpassword:userValid.tpassword});
             // console.log(isMatch)
 
@@ -56,9 +59,9 @@ router.post("/theatreadminlogin", async(req, res) => {
             }else{
                 const isValid = await Tadmin.findOne({tpassword:userValid.tpassword, isApproved: "approved"});
                 if(isValid){
-                    console.log("login")
+                    // console.log("login")
                 const token = await userValid.generateAuthtoken();
-                console.log("token")
+                // console.log("token")
                 // res.cookie("usercookie",token,{
                 //     expires:new Date(Date.now()+9000000),
                 //     httpOnly:true,
@@ -137,7 +140,7 @@ router.get("/tlogout",authenticate,async(req,res)=>{
 })
 
 router.post("/addShow", async(req, res) => {
-    let { movie, timing, price, theatreName, date } = req.body;
+    let { movie, timing, normalPrice, executivePrice, premiumPrice, theatreName, date } = req.body;
     
     // const array = timing.split(":")
     
@@ -146,7 +149,7 @@ router.post("/addShow", async(req, res) => {
     // } else {
     //     timing = timing + 'AM'
     // }
-    const show = {timing, price}
+    const show = {timing, normalPrice, executivePrice, premiumPrice}
 
     try {
         const findShow = await Show.findOne({movie:movie, theatreName:theatreName, date:date})

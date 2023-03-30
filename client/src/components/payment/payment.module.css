@@ -1,0 +1,42 @@
+.payment h2{
+    background-color: #002541;
+    color: white;
+    padding: 1rem;
+}
+
+.payment h3{
+    overflow: hidden;
+    margin-left: 1rem;
+}
+
+.payment h5{
+    margin-left: 1rem;
+}
+
+.descbtn{
+    width:10rem;
+    height: 3.5rem;
+    text-align: center;
+    /* padding-top: 0.5rem; */
+    font-size:1.2rem;
+    color: #fff;
+    background-color: #002541;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+.descbtn:hover{
+   background-color: #fff;
+   color: #002541;
+   border: 3px solid #002541;
+}
+
+.ticket{
+    width: 25rem;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    border: 1px solid black;
+    padding: 1rem;
+}
+

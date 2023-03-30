@@ -43,14 +43,25 @@
     transform: rotateX(-50deg);
     box-shadow: 0 3px 10px rgba(13, 4, 111, 0.7);
   }
-  .seat{
+
+  
+  .seatf,.seats,.seatt{
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     width: 30px;
     height: 30px;
-    background-color: rgb(50, 67, 124);
+    /* background-color: rgb(50, 67, 124); */
     margin: 5px;
     font-size: 13px;
+  }
+  .seatf{
+    background-color: rgb(50,67,124);
+  }
+  .seats{
+    background-color: #fba12e;
+  }
+  .seatt{
+    background-color: grey;
   }
   /* .selected {
     background-color: grey;
@@ -72,6 +83,7 @@
     display: flex;
     margin-left: 550px;
   } */
+
   .showcase .seat:not(.sold):hover {
     cursor: default;
     transform: scale(1);

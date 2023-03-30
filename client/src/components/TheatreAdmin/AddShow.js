@@ -3,12 +3,17 @@ import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../ContextProvider/Context'
 import { ToastContainer, toast } from 'react-toastify';
-import {DayPicker} from 'react-day-picker'
-import 'react-day-picker/dist/style.css'
-import 'react-toastify/dist/ReactToastify.css';
+// import {DayPicker} from 'react-day-picker'
+// import 'react-day-picker/dist/style.css'
+// import 'react-toastify/dist/ReactToastify.css';
 import styles from './AddShow.module.css'
 
 const AddShow = () => {
+    // useEffect(() => {
+    //     var today = new Date().toISOString().split('T')[0];
+    //     console.log(today);
+    //     document.getElementsByName("date")[0].setAttribute('min', today);
+    // })
     const { logindata, setLoginData } = useContext(LoginContext);
     // console.log(logindata)
     const [theatreName, setTheatreName] = useState('')
@@ -29,10 +34,10 @@ const AddShow = () => {
         const data = await res.json();
         console.log(data)
         if (data.status === 401 || !data) {
-          console.log("error page")
+        //   console.log("error page")
           history("*");
         } else {
-          console.log("user verify");
+        //   console.log("user verify");
           setLoginData(data)
           setTheatreName(data.ValidUserOne.tname)
         }    
@@ -41,7 +46,9 @@ const AddShow = () => {
     const[show, setShow] = useState({
         movie: "",
         timing: "",
-        price: "",
+        normalPrice: "",
+        executivePrice: "",
+        premiumPrice: "",
         date: ""
     })
 
@@ -68,7 +75,13 @@ const AddShow = () => {
     const submit = async(e) => {
         e.preventDefault();
 
-        const {movie, timing, price, date} = show;
+        const {movie, timing, normalPrice, executivePrice, premiumPrice, date} = show;
+        if(movie==="" || timing==="" || normalPrice==="" || executivePrice==="" || premiumPrice==="" || date===""){
+            toast.error('Please fill required field!', {
+                position: "top-center"
+            })
+        }
+        else{
         console.log(show)
         // console.log(theatreName)
         const url = "http://localhost:5000/addShow"
@@ -78,7 +91,7 @@ const AddShow = () => {
                 "Content-Type": "Application/json",
             },
             body:JSON.stringify({
-                movie, timing, price, theatreName, date
+                movie, timing, normalPrice, executivePrice, premiumPrice, theatreName, date
             })
         })
 
@@ -89,12 +102,23 @@ const AddShow = () => {
             toast.success('Show added successfuly!', {
                 position: "top-center"
               })
+            
+            setShow({
+                movie: "",
+        timing: "",
+        normalPrice: "",
+        executivePrice: "",
+        premiumPrice: "",
+        date: ""
+            })
+
         }
         else if(res.status === 422 ){
             toast.warning('This movie already exist!', {
               position: "top-center"
             })
         }
+    }
     }
     
     // displayFun()
@@ -110,12 +134,15 @@ const AddShow = () => {
             <option key={i} value={item.movieName}>{item.movieName}</option>
         )}
     )
+    
     useEffect(() => {
         setTimeout(() => {
             DashboardValid();
             setData(true)
         })
-    
+        var today = new Date().toISOString().split('T')[0];
+        console.log(today);
+        document.getElementsByName("date")[0].setAttribute('min', today);
     }, [])
 // const today = new Date()
 // const disablePastDate = () => {
@@ -127,22 +154,29 @@ const AddShow = () => {
 // };
   return (
     <div>
+        <center>
         <form className="row g-3">
-            
+            <h3>Add Show</h3>
             <select name="movie" onClick={displayFun} value={show.movie} onChange={setValue}>
                 <option value="">Select movie</option>
 		        {display}
 	        </select>
             <label htmlFor="date" className="form-label">Date</label>
-            <DayPicker />
-            {/* <input type="date" name='date' value={show.date} onChange={setValue} min = {disablePastDate()}/> */}
+            {/* <DayPicker /> */}
+            {/* <input type="date" name="date" value={show.date} onChange={setValue} /> */}
+            <input name="date" value={show.date} onChange={setValue} type="date"/>
             <label htmlFor="timing" className="form-label">Timing</label>
             <input type="time" name='timing' value={show.timing}  onChange={setValue}/>
-            <label htmlFor="price" className="form-label">Price</label>
-            <input type="text" name='price' value={show.price} onChange={setValue}/>
+            <label htmlFor="price" className="form-label">Normal Price</label>
+            <input type="text" name='normalPrice' value={show.normalPrice} onChange={setValue}/>
+            <label htmlFor="price" className="form-label">Executive Price</label>
+            <input type="text" name='executivePrice' value={show.executivePrice} onChange={setValue}/>
+            <label htmlFor="price" className="form-label">premium Price</label>
+            <input type="text" name='premiumPrice' value={show.premiumPrice} onChange={setValue}/>
             
             <button type='submit' onClick={submit}>Submit</button>
         </form>
+        </center>
         <ToastContainer />
     </div>
   )

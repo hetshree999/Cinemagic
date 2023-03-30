@@ -59,7 +59,7 @@ const Thome = () => {
         console.log("use logout");
         localStorage.removeItem("tadmindatatoken");
         setLoginData(false)
-        history("/");
+        history("/tlogin");
     } else {
         console.log("error");
     }
@@ -82,7 +82,7 @@ const Thome = () => {
 	<p class="logo">Cinemagic</p>
   <a href="#" class="icon-a"><i class="fa fa-dashboard icons"></i> &nbsp;&nbsp;Dashboard</a>
   <a href="#"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Customers</a>
-  <a href="#"class="icon-a"><i class="fa fa-sign-out" onClick={handleLogout}></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
+  <NavLink to="/tlogin" class="icon-a"><i class="fa fa-sign-out" onClick={handleLogout}></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</NavLink>
   <NavLink to="/addShow" class="icon-a"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Show</NavLink>
   {/* <a href="#"class="icon-a"><i class="fa fa-list icons"></i> &nbsp;&nbsp;Projects</a>
   <a href="#"class="icon-a"><i class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;Orders</a>
