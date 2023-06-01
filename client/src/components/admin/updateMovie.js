@@ -11,8 +11,15 @@ const UpdateMovie = () => {
         description:"",
         genre:"",
         certificate:"",
-        dimensions:"",
+        dimensions:""
     })
+
+    const [image, setImage] = useState("")
+
+    const imageUpload = (e) =>{
+      setImage(e.target.files[0])
+    }
+
     const setValue = ({currentTarget: input}) => {
         setMovies({...movies, [input.name]:input.value})
     }
@@ -35,8 +42,54 @@ const UpdateMovie = () => {
         if(res.status===201)
         {
             setMovies(res.detail)
+            // setImage(res.detail.image)
         }
     }
+
+    const updateMovieData = async(e) => {
+      e.preventDefault()
+      const {movieName,releaseDate,duration,description,genre,certificate,dimensions} = movie;
+  
+      if(movieName === "" || releaseDate === "" || duration === "" || description === "" || genre === "" || certificate === "" || dimensions === "" || image === ""){
+        toast.warning("Please enter required field!", {
+          position: "top-center"
+        });
+      }
+      else{
+        // console.log(movie)
+        console.log(image)
+        const url = "http://localhost:5000/updateMovie/" + id
+        const formdata = new FormData();
+        formdata.append('movieName', movies.movieName)
+        formdata.append('dimensions', movies.dimensions)
+        formdata.append('releaseDate', movies.releaseDate)
+        formdata.append('description', movies.description)
+        formdata.append('certificate', movies.certificate)
+        formdata.append('duration', movies.duration)
+        formdata.append('genre', movies.genre)
+        formdata.append('poster', image)
+        
+        const data = await fetch(url, {
+          method: "PUT",
+          withCredentials: true,
+          body: formdata
+        })
+        
+        const res = await data.json()
+        console.log(res.status)
+        if(res.status === 200){
+          toast.success('Movie updated successfuly!', {
+            position: "top-center"
+          })
+        } 
+        else if(res.status === 500){
+          toast.warning('Internel server error!', {
+            position: "top-center"
+          })
+        }
+      }
+    }
+
     useEffect(()=>{
         movie()
     }, [])
@@ -86,7 +139,7 @@ const UpdateMovie = () => {
     </select>
   </div>
   <div className="col-md-12" >
-  Movie Image : <input type="file" name="uploaded_file" id="castImage" />
+  Movie Image : <input type="file" name="uploaded_file" id="castImage" onChange={imageUpload}/>
   </div>
   {/* <div className="col-md-2">
     <label for="inputZip" className="form-label">Zip</label>
@@ -102,7 +155,7 @@ const UpdateMovie = () => {
   </div>
     
   <div className="col-12">
-    <button type="submit" className="btn btn-primary">Update Movie</button>
+    <button type="submit" className="btn btn-primary" onClick={updateMovieData}>Update Movie</button>
   </div>
 </form>
 </center>

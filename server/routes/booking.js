@@ -27,6 +27,7 @@ router.post("/addBooking", async(req,res) => {
                 {movie:moviename, theatreName:theatrename, date:showdate, show:{$elemMatch:{timing:showtime}}},
                 {$push: { "show.$.booked": { $each: seatnumber }}}
             )
+            console.log("done")
 
             const finalBooking = new Book({
                 moviename, theatrename, showtime, bookingdate, showdate, normalprice, executiveprice, premiumprice, totalprice, seatnumber, userid  
@@ -51,9 +52,10 @@ router.post("/getBookedSeat", async(req,res) => {
     const time = req.body.time
     // const price = req.body.price
     const showdate = req.body.showdate
+
+
     try{
-        // const seat = await Show.findOne({movie:movie, theatreName:theatre, date:showdate, show:{$elemMatch:{timing:time}}},{show:{booked:1, normalPrice:1,executivePrice:1,premiumPrice:1},_id:0})
-        const seat = await Show.findOne({movie:movie, theatreName:theatre, date:showdate, show:{$elemMatch:{timing:time}}},{show:{booked:1, normalPrice:1, executivePrice:1, premiumPrice:1}})
+        const seat = await Show.findOne({movie:movie, theatreName:theatre, date:showdate, "show.timing":time},{show:{booked:1, normalPrice:1, executivePrice:1, premiumPrice:1}})
         res.status(201).json({status:201,seat});
     } catch(error) {
         res.status(422).json(error)

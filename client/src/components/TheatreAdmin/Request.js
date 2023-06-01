@@ -106,35 +106,35 @@ const Request = () => {
                         <i className="fas fa-user"></i>
                     </div>
                     </div>
-                    <div className={styles.div}>
+                    <div className={styles.div} style={{overflow:"hidden"}}>
                         <input type="text" className={styles.input} value={TAdmin.tname} onChange={setValue} placeholder="Theatername" name="tname"/>
                     </div>
                     
                 </div>
-                <div className={styles.inputdiv}>
+                <div className={styles.inputdiv} style={{overflow:"hidden"}}>
                     <div className={styles.inputdivTwo}>
-                    <div className={styles.i}>
+                    <div className={styles.i} style={{overflow:"hidden"}}>
                         <i className="fas fa-envelope"></i>
                     </div>
                     </div>
-                    <div className={styles.div}>
+                    <div className={styles.div} style={{overflow:"hidden"}}>
                         <input type="text" className={styles.input} value={TAdmin.temail} onChange={setValue} placeholder="Email" name="temail"/>
                     </div>
                 </div>
-                <div className={styles.inputdiv}>
-                    <div className={styles.inputdivOne}>
-                    <div className={styles.i}>
+                <div className={styles.inputdiv} style={{overflow:"hidden"}}>
+                    <div className={styles.inputdivOne} style={{overflow:"hidden"}}>
+                    <div className={styles.i} style={{overflow:"hidden"}}>
                         <i className="fa fa-key"></i>
                     </div>
                     </div>
-                    <div className={styles.div}>
+                    <div className={styles.div} style={{overflow:"hidden"}}>
                         <input type="text" className={styles.input} value={TAdmin.gstNum} onChange={setValue} placeholder="GST Number" name="gstNum"/>
                     </div>
                 </div>
                 <div className={styles.inputdiv}>
                     <div className={styles.inputdivOne}>
                     <div className={styles.i}> 
-                    <i class="fa fa-address-card-o" style={{color:"#858c99"}}></i>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
                         
                     </div>
                     </div>
@@ -144,7 +144,8 @@ const Request = () => {
                 </div>
                 <div className={styles.inputdiv}>
                     <div className={styles.inputdivOne}>
-                    <div className={styles.i}> 
+                    <div className={styles.i}>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
                     {/* <i class="fa fa-address-card-o" style={{color:"#858c99"}}></i> */}
                         
                     </div>
@@ -156,6 +157,7 @@ const Request = () => {
                 <div className={styles.inputdiv}>
                     <div className={styles.inputdivOne}>
                     <div className={styles.i}> 
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
                     {/* <i class="fa fa-address-card-o" style={{color:"#858c99"}}></i> */}
                         
                     </div>
@@ -164,19 +166,20 @@ const Request = () => {
                         <input type="text" className="input" value={TAdmin.state} onChange={setValue} placeholder="State" name="state"/>
                     </div>
                 </div>
-                <div className={styles.inputdiv}>
-                    <div className={styles.inputdivOne}>
-                    <div className={styles.i}> 
+                <div className={styles.inputdiv} style={{overflow:"hidden"}}>
+                    <div className={styles.inputdivOne} style={{overflow:"hidden"}}>
+                    <div className={styles.i} style={{overflow:"hidden"}}> 
+                    <i className="fa fa-key"></i>
                     {/* <i class="fa fa-address-card-o" style={{color:"#858c99"}}></i> */}
                         
                     </div>
                     </div>
-                    <div className="div">
-                        <input type="number" className="input" value={TAdmin.pincode} onChange={setValue} placeholder="Pincode" name="pincode"/>
+                    <div className="div" style={{overflow:"hidden"}}>
+                        <input type="number" className="input" value={TAdmin.pincode} onChange={setValue} placeholder="Pincode" name="pincode" style={{overflow:"hidden"}}/>
                     </div>
                 </div>
-                <label>Date Of Inspection</label>
-                <input name="inspectionDate" value={TAdmin.inspectionDate} onChange={setValue} type="date"/>  
+                <label style={{color:"#999"}}>Date Of Inspection</label>
+                <input name="inspectionDate" value={TAdmin.inspectionDate} onChange={setValue} type="date" style={{color:"#999"}}/>  
                 <div className={styles.inputdiv}>
                     <div className={styles.inputdivOne}>
                     <div className={styles.i}> 

@@ -67,7 +67,8 @@ useEffect(() => {
               <h5>Book Tickets</h5>
               <p>book your favorite movie tickets from anywhere and at any time online,check showtimes and watch trailer of movies 
               </p>
-              <NavLink to='/movies' className={styles.hbtn}>Book Now</NavLink>
+              {/* <NavLink to='/movies' className={styles.hbtn}>Book Now</NavLink> */}
+              <NavLink to='/movies' style={{border:"2px solid black", width:"150px", height:"50px", textAlign:"center", color:"black", fontWeight:"500", fontSize:"20px",paddingTop:"8px"}}>Book Now</NavLink>
             </div>
             <div className={styles.himage}>
               <img src='./images/avengers.png'/>

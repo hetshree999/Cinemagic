@@ -68,7 +68,6 @@ const History = () => {
     }
     useEffect(() => {
         fetchData()
-
     }, [])
 
     return(

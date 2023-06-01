@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from "react-router-dom";
 import Register from './components/authentication/Register';
 import Login from './components/authentication/Login';
@@ -20,9 +20,13 @@ import Payment from './components/payment/Payment';
 import Profile from './components/authentication/Profile';
 import History from './components/authentication/history';
 import FinalPay from './components/payment/FinalPay';
-import UpdateMovie from './components/admin/updateMovie'
+import UpdateMovie from './components/admin/updateMovie';
+import Customer from './components/admin/Customer';
 
 function App() {
+  useEffect(() => {
+    document.title = 'Cinemagic';
+  })
   // const user = localStorage.getItem("userdatatoken");
   // console.log(user)
 
@@ -50,6 +54,7 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/history' element={<History />} />
         <Route path='/updateMovie/:id' element={<UpdateMovie />} />
+        <Route path='/users' element={<Customer />} />
         <Route path="*" element={<Error />} />
         {/* <Route path='description' element={<Description />} /> */}
       </Routes>

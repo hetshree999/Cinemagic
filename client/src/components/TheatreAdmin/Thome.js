@@ -82,8 +82,9 @@ const Thome = () => {
 	<p class="logo">Cinemagic</p>
   <a href="#" class="icon-a"><i class="fa fa-dashboard icons"></i> &nbsp;&nbsp;Dashboard</a>
   <a href="#"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Customers</a>
-  <NavLink to="/tlogin" class="icon-a"><i class="fa fa-sign-out" onClick={handleLogout}></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</NavLink>
   <NavLink to="/addShow" class="icon-a"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Show</NavLink>
+  <NavLink to="/tlogin" class="icon-a"><i class="fa fa-sign-out" onClick={handleLogout}></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</NavLink>
+  
   {/* <a href="#"class="icon-a"><i class="fa fa-list icons"></i> &nbsp;&nbsp;Projects</a>
   <a href="#"class="icon-a"><i class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;Orders</a>
   <a href="#"class="icon-a"><i class="fa fa-tasks icons"></i> &nbsp;&nbsp;Inventory</a>
@@ -109,58 +110,7 @@ const Thome = () => {
 </div>
 
 
-<div className="coldiv8">
-		<div className="box8">
-		<div className="contentbox">
-			<p>Added Movies</p>
-			<br/>
-			<table>
-  <tr>
-    <th>Movie Name</th>
-    <th>Cinema</th>
-    <th>Showtime</th>
-    <th>Price</th>
-  </tr>
-  <tr>
-    <td>ABC</td>
-    <td>ABC</td>
-    <td>ABC</td>
-    <td>ABC</td>
-  </tr>
-  <tr>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
-  <tr>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
-  <tr>
-  <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
-  <tr>
-  <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
-  <tr>
-  <td>--</td>
-    <td>--</td>
-    <td>--</td>
-    <td>--</td>
-  </tr>
-</table>
-		</div>
-	</div>
-	</div>
+
 
     </div>
   )

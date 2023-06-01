@@ -44,7 +44,7 @@ const FinalPay = () => {
       	});
 		
       }
-	  navigate('/home')
+	  navigate(-2)
 		
 	} 
   return (

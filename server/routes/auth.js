@@ -7,7 +7,7 @@ const Booking = require("../models/bookModel")
 const authenticate = require("../middleware/authenticate")
 const tauthenticate = require("../middleware/tauthenticate")
 
-//---------User Registration-------------//
+//-------------User Registration-------------//
 
 router.post("/register", async(req, res) => {
     console.log(req.body)
@@ -43,7 +43,7 @@ router.post("/register", async(req, res) => {
     }
 })
 
-//-----------User Login------------//
+//------------User Login------------//
 
 router.post("/login", async(req, res) => {
     console.log(req.body)
@@ -85,6 +85,8 @@ router.post("/login", async(req, res) => {
     }
 })
 
+//------------Validate user------------//
+
 router.get("/validuser",authenticate,async(req,res)=>{
     try {
         const ValidUserOne = await User.findOne({_id:req.userId});
@@ -94,10 +96,14 @@ router.get("/validuser",authenticate,async(req,res)=>{
     }
 });
 
+//------------Find user------------//
+
 router.get("/findUser/:id", async(req, res) => {
     const user = await User.findOne({ _id: req.params.id })
     res.status(201).json({ status: 201, user })
 })
+
+//------------Update user------------//
 
 router.put("/updateUser/:id", async(req, res) => {
     console.log(req.body);
@@ -111,12 +117,16 @@ router.put("/updateUser/:id", async(req, res) => {
         // res.status(201).json({ status: 201, user })
 })
 
+//------------Past booking------------//
+
 router.get("/findHistory/:id", async(req, res) => {
     const bookings = await Booking.find({ userid: req.params.id })
     console.log(bookings);
     res.status(201).json({ status: 201, bookings })
         // Booking.
 })
+
+//------------User Logout------------//
 
 router.get("/logout",authenticate,async(req,res)=>{
     try {
@@ -134,9 +144,5 @@ router.get("/logout",authenticate,async(req,res)=>{
         res.status(401).json({status:401,error})
     }
 })
-
-
-
-
 
 module.exports = router

@@ -47,26 +47,15 @@ userSchema.pre("save", async function(next){
 
 userSchema.methods.generateAuthtoken = async function () {
     try {
-        let token23 = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
+        let token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
             expiresIn: "1d"
         });
-
-        // this.tokens = this.tokens.concat({ token: token23 });
-        // await this.save();
-        return token23;
+        return token;
     } catch (error) {
         res.status(422).json(error)
     }
 }
 
-// userSchema.methods.generateAuthToken = function () {
-// 	const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-// 		expiresIn: "1d",
-// 	});
-// 	return token;
-// };
-
 const User = new mongoose.model("users", userSchema);
 module.exports = User;
 
-// npm i validator  ----> install

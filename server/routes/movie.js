@@ -109,6 +109,28 @@ router.post("/getShows", async(req,res) => {
     } catch (error) {
         res.status(401).json({status:401,error});
     }
-
 })
+
+router.put("/updateMovie/:id",upload, async(req, res) => {
+    console.log(req.body);
+    Movie.findOneAndUpdate(
+        { _id: req.params.id }, 
+        {   movieName: req.body.name, 
+            dimensions: req.body.dimensions, 
+            releaseDate: req.body.releaseDate, 
+            description: req.body.description, 
+            certificate: req.body.certificate, 
+            duration: req.body.duration, 
+            genre: req.body.genre,
+            image: req.file.filename
+        }, (err, data) => {
+            if (err) {
+                res.status(500).json({ status: 500, error: err })
+            } else {
+                res.status(200).json({ status: 200, data })
+            }
+        })
+        // res.status(201).json({ status: 201, user })
+})
+
 module.exports = router

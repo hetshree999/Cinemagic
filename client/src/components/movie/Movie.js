@@ -24,10 +24,7 @@ const Movie = () => {
     
 
     useEffect(() => {
-        setTimeout(() => {
             displayFun();
-        })
-    
     }, [])
 
     const display = movie.map((item) => {

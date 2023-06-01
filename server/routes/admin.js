@@ -27,6 +27,16 @@ router.get('/adminDash', async(req,res)=>{
     }
 })
 
+router.get('/users', async(req,res) => {
+    const users = await User.find({},{_id:0})
+    if(users){
+        res.status(201).json({status:201, users})
+    }
+    else{
+        res.status(404).json({ status:404})
+    }
+})
+
 router.get('/getMovies', (req, res) => {
     Movie.find({}, (err, data) => {
         if (err) {

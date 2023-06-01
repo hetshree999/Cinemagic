@@ -43,6 +43,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
+    
     /* width: 500vw; */
 }
 
@@ -53,6 +54,7 @@ body {
 
 form {
     width: 360px;
+    overflow: hidden;
     /* position: fixed; */
 }
 
@@ -86,6 +88,7 @@ form {
     margin: 18px 0;
     padding: 5px 0;
     border-bottom: 2px solid #d9d9d9;
+    overflow: hidden;
 }
 
 .loginContent .inputdiv .inputdivOne {
@@ -101,6 +104,7 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .i i {
@@ -109,6 +113,7 @@ form {
 
 .inputdiv>div {
     position: relative;
+    overflow: hidden;
     height: 45px;
 }
 

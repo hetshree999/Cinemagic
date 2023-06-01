@@ -137,10 +137,11 @@ const handleLogout = async () => {
       <div id="mySidenav" class="sidenav">
 	<p class="logo">Cinemagic</p>
   <a href="#" class="icon-a"><i class="fa fa-dashboard icons"></i> &nbsp;&nbsp;Dashboard</a>
-  <a href="#"class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Customers</a>
+  <NavLink to="/users" class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Users</NavLink>
   <NavLink to="/adminHome" class="icon-a"><i class="fa fa-users icons"></i> &nbsp;&nbsp;Show request</NavLink>
-  <NavLink to="/" class="icon-a" onClick={handleLogout}><i class="fa fa-sign-out"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</NavLink>
   <NavLink to="/addMovie" class="icon-a"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Movie</NavLink>
+  <NavLink to="/" class="icon-a" onClick={handleLogout}><i class="fa fa-sign-out"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</NavLink>
+  
   {/* <a href="#"class="icon-a"><i class="fa fa-list icons"></i> &nbsp;&nbsp;Projects</a>
   <a href="#"class="icon-a"><i class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;Orders</a>
   <a href="#"class="icon-a"><i class="fa fa-tasks icons"></i> &nbsp;&nbsp;Inventory</a>

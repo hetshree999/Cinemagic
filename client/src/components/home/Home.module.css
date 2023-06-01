@@ -50,4 +50,6 @@
     position: relative;
     color: black;
     font-weight: 800;
+
+    z-index: -1;
 }
