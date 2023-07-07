@@ -1,5 +1,8 @@
 # Cinemagic
 
+### Report Link
+https://drive.google.com/file/d/1tvb_wPnshv1KPdTTf_PwOZ9grcZIi63Q/view?usp=sharing
+
 ## ScreenShots
 
 ### 1. User Login
